@@ -257,17 +257,20 @@ class Rede(tk.Frame):
 
         for i in range(len(self.listadeNos)):
             aux = []
-            for j in range(len(self.listadeNos[i].nosAdj)):
-                aux.append(self.listadeNos[i].nosAdj[j].nome_No)
-            
+            for j in range(len(self.listadeNos[i].arestasAdj)):
+                if(self.listadeNos[i].arestasAdj[j].lista[self.listadeNos[i].arestasAdj[j].No1].nome_No == self.listadeNos[i].nome_No):
+                    aux.append(self.listadeNos[i].arestasAdj[j].lista[self.listadeNos[i].arestasAdj[j].No2].nome_No)
+                else:
+                    aux.append(self.listadeNos[i].arestasAdj[j].lista[self.listadeNos[i].arestasAdj[j].No1].nome_No)
+                aux.append(self.listadeNos[i].arestasAdj[j].comprimento)
             adj.append(aux)
 
         arquivo['Nome'] = nome
         arquivo['Px'] = posx
         arquivo['Py'] = posy
-        arquivo['Adjacencia'] = adj
+        arquivo['Adjacencias'] = adj
 
-        arquivo.to_csv('topologia.csv')
+        arquivo.to_csv('topologia.csv',index=False)
 
     def contaNos(self):
 
