@@ -38,8 +38,6 @@ class Aresta(object):
         y = (self.lista[No1].posicaoAtual[1] + self.lista[No2].posicaoAtual[1]) / 2
         canvas.create_window(x, y, window=self.widget)
 
-    # def atualiza_aresta(self,No1, No2,comp):
-    #     self.posicaoAresta = No1,No2
 
     def deleta_Aresta(self):
         self.canvas.delete(self.aresta)
@@ -72,31 +70,11 @@ class Aresta(object):
         self.k = ttk.Button(self.win, text="Exclui Aresta", command=self.deleta_Aresta)
         self.k.grid(row=3, column=3)
 
-        # k = ttk.Button(self.win, text="Exclui Aresta", command=self.deleta_Aresta)
-        # k.grid(row=3, column=2)
-
     def salva_conf(self):
         self.comprimento = self.distancia.get()
         self.message.set(self.comprimento)
         self.widget.configure(text=self.message.get())
         self.win.destroy()
-
-    # def criar_Aresta(self):
-    #     self.comprimento = tk.Entry(self.win)
-    #     self.comprimento.insert(10, self.nome_No)
-    #     self.nome_NoAt.grid(row=1, column=2)
-    #
-    #     space = tk.Label(self.win, text=" ")
-    #     space.grid(row=2)
-    #
-    #     b = ttk.Button(self.win, text="Sair", command=self.win.destroy)
-    #     b.grid(row=3, column=1)
-    #
-    #     k = ttk.Button(self.win, text="Salvar Altereções", command=self.atualiza_info)
-    #     k.grid(row=3, column=3)
-    #
-    #     d = ttk.Button(self.win, text="Apagar Nó", command=self.deleta_No)
-    #     d.grid(row=3, column=2)
 
 class No(object):
     def __init__(self, canvas, image_name, xpos, ypos, cont):
@@ -136,12 +114,6 @@ class No(object):
 
         space = tk.Label(self.win,text=" ")
         space.grid(row=2)
-
-        # space2 = tk.Label(self.win,text=" ")
-        # space2.grid(row=3,column= 2)
-
-        # b = ttk.Button(self.win, text="Sair", command=self.win.destroy)
-        # b.grid(row=3, column=1)
 
         k = ttk.Button(self.win, text="Salvar", command=self.atualiza_info)
         k.grid(row=3, column=1)
@@ -193,11 +165,6 @@ class No(object):
 
         self.canvas_id = self.canvas.create_text(new_xpos - 10, new_ypos - 35, anchor="nw", tag="text")
         self.canvas.itemconfig(self.canvas_id, text=self.nome_No, font='Helvetica 10')
-        # for i in range(len(self.arestasAdj)):
-        #     comprimentoSalvo = self.arestasAdj[i].comprimento
-        #     self.arestasAdj[i].deleta_Aresta()
-            #new = Aresta(self,comprimentoSalvo,self.posicaoAtual,self.nosAdj[i].posicaoAtuallista=None)
-            #self.arestasAdj.append(new)
 
 class Rede(tk.Frame):
     def __init__(self, master):
@@ -216,7 +183,7 @@ class Rede(tk.Frame):
         master.config(menu=menubar)
         fileMenu = Menu(menubar)
         fileMenu.add_command(label="Criar Rede")
-        fileMenu.add_command(label="Carregar Rede")
+        fileMenu.add_command(label="Carregar Rede",command =self.carregar_Rede)
         fileMenu.add_command(label="Exit",command=self.close)
         menubar.add_cascade(label="File", menu=fileMenu)
         self.cont = 0
@@ -224,17 +191,58 @@ class Rede(tk.Frame):
         self.canvas.pack(fill="both", expand=True)
  
         self.criar_no = tk.Button(self, text="Nó", width="10", command=self.criar_No)
-        # self.criar_no.pack(side="bottom", anchor="w")
         self.criar_no.place(relx=.2, rely=0.96, anchor="w")
 
         self.salvar_topologia = tk.Button(self, text="Salvar topologia", width="15", command=self.salvar_Topologia)
         self.salvar_topologia.place(relx=.6, rely=.96, anchor="e")
 
         self.criar_aresta = tk.Button(self, text="Aresta", width="10", command=self.criar_Aresta)
-        # self.criar_aresta.pack(side="bottom", anchor="e")
         self.criar_aresta.place(relx=.8, rely=.96, anchor="e")
 
+    def carregar_Topologia(self):
+        self.win = tk.Toplevel()
+        self.win.wm_title("Nova Topologia")
+        self.win.geometry("%dx%d%+d%+d" % (350, 80, 100, 200))
+
+        l = tk.Label(self.win,text="Insira o caminho do arquivo que você deseja carregar:")
+        l.place(relx=0.5, rely=0.1, anchor="c")
+
+        self.caminho = tk.Entry(self.win)
+        self.caminho.place(relx=.5, rely=.4, anchor="c")
+
+        k = ttk.Button(self.win, text="OK", command=lambda: self.criar_Rede)
+        k.place(relx=.5, rely=.75, anchor="c")
+
+    def criar_Rede(self):
+        self.topologia = open(self.caminho.get())
+        self.win.destroy()
+
+    def aviso(self,text):
+        self.win = tk.Toplevel()
+        self.win.wm_title("Atenção")
+        self.win.geometry("%dx%d%+d%+d" % (230, 70, 100, 200))
+
+        l = tk.Label(self.win, text=text)
+        l.place(relx=0.5, rely=0.36, anchor="c")
+
+        k = ttk.Button(self.win, text="OK", command= lambda: self.win.destroy())
+        k.place(relx=.5, rely=.8, anchor="c")
+
     def salvar_Topologia(self):
+        self.win = tk.Toplevel()
+        self.win.wm_title("Salvar Topologia")
+        self.win.geometry("%dx%d%+d%+d" % (350, 50, 100, 200))
+
+        l = tk.Label(self.win, text="Nome da Topologia: ")
+        l.grid(row=1,column=1)
+
+        self.nomeTopologia = tk.Entry(self.win)
+        self.nomeTopologia.grid(row=1, column=2)
+
+        k = ttk.Button(self.win, text="Salvar", command= self.criar_Dataframe)
+        k.grid(row=1, column=3)
+
+    def criar_Dataframe(self):
         arquivo = pd.DataFrame()
         arquivo['Nome'] = 0
         arquivo['Px'] = 0
@@ -244,7 +252,7 @@ class Rede(tk.Frame):
         nome = []
         posx = []
         posy = []
-        adj = []
+        adj  = []
 
         for i in range(len(self.listadeNos)):
             nome.append(str(self.listadeNos[i].nome_No))
@@ -270,10 +278,12 @@ class Rede(tk.Frame):
         arquivo['Py'] = posy
         arquivo['Adjacencias'] = adj
 
-        arquivo.to_csv('topologia.csv',index=False)
+        arquivo.to_csv(self.nomeTopologia.get()+'.csv',index=False)
+
+        self.win.destroy()
+        self.aviso("Topologia Salva com sucesso!")
 
     def contaNos(self):
-
         self.cont = self.cont + 1
         t = self.cont
         return t
@@ -330,6 +340,7 @@ class Rede(tk.Frame):
         print(self.listadeNos[item1].arestasAdj)
         print(self.listadeNos[item2].arestasAdj)
         self.win.destroy()
+
     def close(self):
         print("Rede-Shutdown")
         self.master.destroy()
