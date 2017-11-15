@@ -183,7 +183,7 @@ class Rede(tk.Frame):
         master.config(menu=menubar)
         fileMenu = Menu(menubar)
         fileMenu.add_command(label="Criar Rede")
-        fileMenu.add_command(label="Carregar Rede",command =self.carregar_Topologia)
+        fileMenu.add_command(label="Carregar Rede",command =self.carregar_Topologia) #pegando da pasta e tranformando em matriz
         fileMenu.add_command(label="Exit",command=self.close)
         menubar.add_cascade(label="File", menu=fileMenu)
         self.cont = 0
@@ -210,13 +210,42 @@ class Rede(tk.Frame):
         self.caminho = tk.Entry(self.win)
         self.caminho.place(relx=.5, rely=.4, anchor="c")
 
-        k = ttk.Button(self.win, text="OK", command=lambda: self.criar_Rede)
+        k = ttk.Button(self.win, text="OK", command=lambda: self.criar_Topologia)
         k.place(relx=.5, rely=.75, anchor="c")
 
-    def criar_Rede(self):
+    def criar_Topologia(self):
         self.topologia = open(self.caminho.get())
-        self.win.destroy()
-
+        self.win.destroy() 
+        
+        df = pd.read_csv(self.topologia, sep=r',')
+        print(df['Adjacencias'])
+        """new_list = []
+        grafo_adj = {}
+        
+        for i in range(len(df)):
+            string = df['Adjacencias'][i]
+            string = string.replace('[','')
+            string = string.replace(']','')
+            string = string.replace(', ',',')
+            string = string.replace("'","")
+            string = string.split(',')
+            new_list = new_list + [string]
+   
+        grafo = [[0 for _ in range(len(df))] for _ in range (len(df))]
+        
+        listaNomes= ["No 1", "No 2", "No 3"]
+        for i in range (len(df)):
+            for j in range(len(new_list[i])-1):
+                for k in range (len(listaNomes)):
+                    if (listaNomes[k]==new_list[i][j]):
+                        grafo[i][k]=int(new_list[i][j+1])
+            
+            adjacents = []
+            for l in range(len(grafo)):
+                if grafo[i][l] != 0:
+                    adjacents.append(l)
+            grafo_adj[i] = adjacents"""
+                     
     def aviso(self,text):
         self.win = tk.Toplevel()
         self.win.wm_title("Atenção")
