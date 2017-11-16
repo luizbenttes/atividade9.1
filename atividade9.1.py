@@ -6,10 +6,10 @@ import pandas as pd
 
 
 APP_TITLE = "SIMTON"
-APP_XPOS = 100
-APP_YPOS = 100
-APP_WIDTH = 600
-APP_HEIGHT = 400
+APP_XPOS = 300
+APP_YPOS = 50
+APP_WIDTH = 800
+APP_HEIGHT = 600
 
 IMAGE_PATH = "images/"
 
@@ -195,7 +195,7 @@ class Rede(tk.Frame):
 
 	def criar_Canvas(self):
 		self.cont = 0
-		self.canvas = tk.Canvas(self.master, width=600, height=400, bg='white', highlightthickness=0)
+		self.canvas = tk.Canvas(self.master, width=APP_WIDTH, height=APP_HEIGHT, bg='white', highlightthickness=0)
 		self.canvas.pack(fill="both", expand=True)
 
 	def criar_Rede(self):
@@ -351,7 +351,10 @@ class Rede(tk.Frame):
 		self.lista1 = tk.StringVar(self.win)
 		self.lista1.set(" ")
 		self.listaNomesVertices = [str(self.listadeNos[i].nome_No) for i in range(len(self.listadeNos))]
-		w = tk.OptionMenu(self.win, self.lista1, *self.listaNomesVertices)
+		try:
+			w = tk.OptionMenu(self.win, self.lista1, *self.listaNomesVertices)
+		except:
+			pass
 		w.grid(row=2, column=1)
 
 		iy = tk.Label(self.win, text="Para:")
@@ -360,7 +363,10 @@ class Rede(tk.Frame):
 
 		self.lista2 = tk.StringVar(self.win)
 		self.lista2.set(" ")
-		r = tk.OptionMenu(self.win, self.lista2, *self.listaNomesVertices)
+		try:
+			r = tk.OptionMenu(self.win, self.lista2, *self.listaNomesVertices)
+		except:
+			pass
 		r.grid(row=2, column=3)
 
 		k = ttk.Button(self.win, text="Adicionar Aresta", command= self.captura)
@@ -400,6 +406,8 @@ def main():
 	app_win.title(APP_TITLE)
 	app_win.geometry("+{}+{}".format(APP_XPOS, APP_YPOS))
 	app_win.geometry("{}x{}".format(APP_WIDTH, APP_HEIGHT))
+	app_win.resizable(width=False, height=False)
+	app_win.iconbitmap(r'C:\Users\luizb\Documents\Tópicos II\atividade9.1\images\lg.ico')
 	app = Rede(app_win)
 	#.pack(fill='both', expand=True)
 	app_win.mainloop()
