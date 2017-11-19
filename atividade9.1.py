@@ -20,7 +20,7 @@ class Aresta(object):
 		self.comprimento = comprimento
 		self.No1 = No1
 		self.No2 = No2
-		self.valorLambda = valorLambda 
+		self.valorLambda = valorLambda
 		self.canvas = canvas
 		self.lista = lista
 		self.message = tk.StringVar()
@@ -63,7 +63,7 @@ class Aresta(object):
 		l2.place(relx=0.25, rely=0.4, anchor="c")
 
 		self.valorLamb = tk.Entry(self.win)
-		self.valorLamb.insert(10, self.valorLambda)
+		self.valorLamb.insert(10,self.valorLambda)
 		self.valorLamb.place(relx=0.7, rely=0.4, anchor="c")
 
 		t = tk.Button(self.win, borderwidth=0, highlightthickness=0, command=self.salva_conf)
@@ -224,7 +224,7 @@ class Rede(tk.Frame):
 		self.criar_Canvas()
 		self.canvas.configure(background= 'alice blue')
 		
-		self.criar_no = tk.Button(self.canvas, borderwidth=0, highlightthickness=0, command=self.criar_No) #, text="Nó", width="10",
+		self.criar_no = tk.Button(self.canvas, borderwidth=0, highlightthickness=0, command=self.criar_No) 
 		self.img_criarNo = ImageTk.PhotoImage(file="images/button_adicionar-no.png")
 		self.criar_no.config(image=self.img_criarNo)
 		self.image = self.img_criarNo
@@ -286,6 +286,7 @@ class Rede(tk.Frame):
 				if (self.grafo[i][j]!=0 and i<=j):
 					novaAresta = Aresta(self.canvas,self.grafo[i][j], self.listadeNos, i, j, 10) #falta por o lambda
 
+					self.listadeArestas.append(novaAresta)
 					self.listadeNos[i].arestasAdj.append(novaAresta)
 					self.listadeNos[j].arestasAdj.append(novaAresta)
 
@@ -300,11 +301,38 @@ class Rede(tk.Frame):
 		self.image = self.img_simular
 		self.button_simular.place(relx=.04, rely=0.96, anchor="w")
 
-		self.button_config = tk.Button(self.canvas, borderwidth=0, highlightthickness=0) #, command=self.set_Topologia
+		self.button_config = tk.Button(self.canvas, borderwidth=0, highlightthickness=0, command=self.tela_set_Topologia)
 		self.img_conf = ImageTk.PhotoImage(file="images/button_configuracoes.png")
 		self.button_config.config(image=self.img_conf)
 		self.image = self.img_conf
 		self.button_config.place(relx=0.96, rely=.96, anchor="e")
+
+	def tela_set_Topologia(self):
+		self.win = tk.Toplevel()
+		self.win.wm_title("Configuração da Rede")
+		self.win.iconbitmap(r'images\favicon.ico')
+		self.win.geometry("%dx%d%+d%+d" % (300, 140, 100, 200))
+
+		l = tk.Label(self.win, text="Redefinir Lambda: ")
+		l.place(relx=0.3, rely=0.3, anchor="c")
+
+		self.novoL= tk.Entry(self.win, width=15)
+		self.novoL.place(relx=0.7, rely=0.3, anchor="c")
+
+		k = tk.Button(self.win, borderwidth=0, highlightthickness=0, command= self.redefinir_Lambda)
+		self.img_salvar = ImageTk.PhotoImage(file="images/button_salvar.png")
+		k.config(image=self.img_salvar)
+		self.image = self.img_salvar
+		k.place(relx=0.5, rely=0.8, anchor="c")
+
+	def redefinir_Lambda(self):
+		novoLambda = int(self.novoL.get()) 
+		print(novoLambda)
+		for i in range(len(self.listadeArestas)):
+			if(self.listadeArestas[i].on):
+				self.listadeArestas[i].valorLambda = novoLambda
+		print(self.listadeArestas)
+		self.win.destroy()
 
 	def tela_simulacao(self):
 		self.win = tk.Toplevel()
