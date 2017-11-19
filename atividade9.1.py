@@ -112,6 +112,7 @@ class No(object):
 		print("deletado")
 
 	def set_No(self,event):
+
 		self.win = tk.Toplevel()
 		self.win.wm_title("Configurações: "+self.nome_No)
 		self.win.iconbitmap(r'images\favicon.ico')
@@ -290,6 +291,43 @@ class Rede(tk.Frame):
 
 					self.listadeNos[i].nosAdj.append(self.listadeNos[j])
 					self.listadeNos[j].nosAdj.append(self.listadeNos[i])
+		self.carregar_opcoes_topologia()
+
+	def carregar_opcoes_topologia(self):
+		self.button_simular = tk.Button(self.canvas, borderwidth=0, highlightthickness=0, command=self.tela_simulacao)
+		self.img_simular= ImageTk.PhotoImage(file="images/button_simular.png")
+		self.button_simular.config(image=self.img_simular)
+		self.image = self.img_simular
+		self.button_simular.place(relx=.04, rely=0.96, anchor="w")
+
+		self.button_config = tk.Button(self.canvas, borderwidth=0, highlightthickness=0) #, command=self.set_Topologia
+		self.img_conf = ImageTk.PhotoImage(file="images/button_configuracoes.png")
+		self.button_config.config(image=self.img_conf)
+		self.image = self.img_conf
+		self.button_config.place(relx=0.96, rely=.96, anchor="e")
+
+	def tela_simulacao(self):
+		self.win = tk.Toplevel()
+		self.win.wm_title("Simulação")
+		self.win.iconbitmap(r'images\favicon.ico')
+		self.win.geometry("%dx%d%+d%+d" % (300, 200, 100, 200))
+
+		l = tk.Label(self.win, text="Número de Chamadas: ")
+		l.place(relx=0.3, rely=0.3, anchor="c")
+
+		self.numeroChamadas= tk.Entry(self.win, width=15)
+		self.numeroChamadas.place(relx=0.7, rely=0.3, anchor="c")
+
+		k = tk.Button(self.win, borderwidth=0, highlightthickness=0, command= self.simulacao)
+		self.img_inicia = ImageTk.PhotoImage(file="images/button_iniciar-simulacao.png")
+		k.config(image=self.img_inicia)
+		self.image = self.img_inicia
+		k.place(relx=0.5, rely=0.8, anchor="c")
+
+	def simulacao(self):
+		nChamadas = int(self.numeroChamadas.get())
+		print(nChamadas)
+
 
 	def aviso(self,text):
 		self.win = tk.Toplevel()
