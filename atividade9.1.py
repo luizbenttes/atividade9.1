@@ -33,10 +33,15 @@ class Aresta(object):
 		self.widget = tk.Button(self.canvas, text=self.message.get(), 
 			fg='white', bg='black',command =self.configura_Aresta)
 		self.widget.pack()
-		canvas.tag_bind(self.aresta, '<Double-Button-1>', self.configura_Aresta)
+		#canvas.tag_bind(self.aresta, '<Double-Button-1>', self.configura_Aresta)
 		x = (self.lista[No1].posicaoAtual[0] + self.lista[No2].posicaoAtual[0]) / 2
 		y = (self.lista[No1].posicaoAtual[1] + self.lista[No2].posicaoAtual[1]) / 2
 		canvas.create_window(x, y, window=self.widget)
+
+	def deleta_Aresta_2(self):
+		self.on = False
+		self.canvas.delete(self.aresta)
+		self.widget.destroy()
 
 	def deleta_Aresta(self):
 		self.on = False
@@ -53,11 +58,9 @@ class Aresta(object):
 		l = tk.Label(self.win, text="Distância: ")
 		l.place(relx=0.25, rely=0.2, anchor="c")
 
-
 		self.distancia = tk.Entry(self.win)
 		self.distancia.insert(10, self.comprimento)
 		self.distancia.place(relx=0.7, rely=0.2, anchor="c")
-
 
 		l2 = tk.Label(self.win, text="Lambda: ")
 		l2.place(relx=0.25, rely=0.4, anchor="c")
@@ -142,8 +145,10 @@ class No(object):
 	def deleta_No(self):
 		self.canvas.delete(self.image_obj)
 		self.canvas.delete(self.canvas_id)
-		self.__del__()
+		#self.__del__()
 		self.on = False
+		for i in range(len(self.arestasAdj)):
+			self.arestasAdj[i].deleta_Aresta_2()
 		self.win.destroy()	
 
 	def atualiza_info(self):
@@ -264,7 +269,6 @@ class Rede(tk.Frame):
 			string = string.replace("'","")
 			string = string.split(',')
 			new_list = new_list + [string]
-			print(new_list)
 
 		self.grafo = [[0 for _ in range(len(df))] for _ in range (len(df))]
 
@@ -272,8 +276,6 @@ class Rede(tk.Frame):
 			new = No(self.canvas, "pc.png", df['Px'][i], df['Py'][i], df['Nome'][i])
 			self.listadeNos.append(new)
 			self.listaNomesVertices.append(self.listadeNos[i].nome_No)
-		print(self.listadeNos)
-
 
 		for i in range (len(df)):
 			for j in range(len(new_list[i])-1):
@@ -281,7 +283,11 @@ class Rede(tk.Frame):
 					if (self.listaNomesVertices[k]==new_list[i][j]):
 						self.grafo[i][k]=int(new_list[i][j+1])
 
+		self.grafo_adj = {}
+		self.dic_adj = {}
 		for i in range(len(self.grafo)):
+			adjacents = {}
+			adj = []
 			for j in range(len(self.grafo)):
 				if (self.grafo[i][j]!=0 and i<=j):
 					novaAresta = Aresta(self.canvas,self.grafo[i][j], self.listadeNos, i, j, 10) #falta por o lambda
@@ -289,9 +295,16 @@ class Rede(tk.Frame):
 					self.listadeArestas.append(novaAresta)
 					self.listadeNos[i].arestasAdj.append(novaAresta)
 					self.listadeNos[j].arestasAdj.append(novaAresta)
-
+					
 					self.listadeNos[i].nosAdj.append(self.listadeNos[j])
 					self.listadeNos[j].nosAdj.append(self.listadeNos[i])
+
+				if (self.grafo[i][j] != 0):
+					adjacents[j] = (self.grafo[i][j])
+					adj.append(j)
+
+			self.dic_adj[i] = adjacents
+			self.grafo_adj[i] = adj
 		self.carregar_opcoes_topologia()
 
 	def carregar_opcoes_topologia(self):
@@ -327,11 +340,9 @@ class Rede(tk.Frame):
 
 	def redefinir_Lambda(self):
 		novoLambda = int(self.novoL.get()) 
-		print(novoLambda)
 		for i in range(len(self.listadeArestas)):
 			if(self.listadeArestas[i].on):
 				self.listadeArestas[i].valorLambda = novoLambda
-		print(self.listadeArestas)
 		self.win.destroy()
 
 	def tela_simulacao(self):
@@ -352,10 +363,103 @@ class Rede(tk.Frame):
 		self.image = self.img_inicia
 		k.place(relx=0.5, rely=0.8, anchor="c")
 
-	def simulacao(self):
-		nChamadas = int(self.numeroChamadas.get())
-		print(nChamadas)
+	def caminhos(self, grafo, origem, destino):
+		pilha = [(origem, [origem])]
+		while pilha:
+			vertice, caminho = pilha.pop()
+			for proximo in (set(grafo[vertice]) - set(caminho)):
+				if proximo == destino:
+					yield caminho + [proximo]
+				else:
+					pilha.append((proximo, caminho + [proximo]))
+	
+	def pesos(self, grafo, caminhos):
+		pesoCaminho = []
+		for i in range(len(caminhos)):
+			custo = 0
+			for j in range(len(caminhos[i])-1):
+				custo = custo + grafo[caminhos[i][j]][caminhos[i][j+1]]
+			pesoCaminho.append((caminhos[i] , custo))
+		return pesoCaminho
+	
+	def dijkstra(self, grafo, origem, dest, visited=[], distances={}, predecessors={}):
+		if origem == dest:
+			path=[]
+			pred=dest
+			while pred != None:
+				path.append(pred)
+				pred=predecessors.get(pred,None)
+			print('Menor caminho: '+str(path)+" custo = "+str(distances[dest])) 
+		else :     
+			if not visited: 
+				distances[origem] = 0
+			for neighbor in grafo[origem] :
+				if neighbor not in visited:
+					new_distance = distances[origem] + grafo[origem][neighbor]
+					if new_distance < distances.get(neighbor,float('inf')):
+						distances[neighbor] = new_distance
+						predecessors[neighbor] = origem
+			visited.append(origem)
+			unvisited={}
+			for k in grafo:
+				if k not in visited:
+					unvisited[k] = distances.get(k,float('inf'))
+			x = min(unvisited, key=unvisited.get)
+			self.dijkstra(grafo, x, dest, visited, distances, predecessors)
 
+	def simulacao(self):
+		arquivo = pd.DataFrame()
+		arquivo['# da Simulação'] = 0
+		arquivo['Origem->Destino'] = 0
+		arquivo['Caminho'] = 0
+		arquivo['Peso'] = 0
+
+		n 		   = []
+		origemDest = []
+		caminho    = []
+		peso       = []
+
+		nChamadas = int(self.numeroChamadas.get())
+		for i in range(nChamadas):
+			import random as rd 
+			no1 = rd.randint(0,len(self.listadeNos)-1)
+			no2 = rd.randint(0,len(self.listadeNos)-1)
+			while no1 == no2:
+				no2 = rd.randint(0,len(self.listadeNos)-1)
+
+			self.dijkstra(self.dic_adj, no1, no2,visited=[], distances={}, predecessors={})
+
+			caminhos = list(self.caminhos(self.grafo_adj, no1, no2))
+			td = self.pesos(self.grafo, caminhos)
+
+			for j in range(len(caminhos)):
+				n.append(i)
+			n.append("")
+			for j in range(len(caminhos)):
+				origemDest.append(str(self.listadeNos[no1].nome_No)+"->"+str(self.listadeNos[no2].nome_No))
+			origemDest.append("")
+			for j in range(len(caminhos)):
+				c,p = td[j][0],td[j][1]
+				for k in range(len(c)):
+					c[k] = self.listadeNos[int(c[k])].nome_No
+				c = str(c)
+				c = c.replace(",","->")
+				c = c.replace("[","")
+				c = c.replace("]","")
+				c = c.replace("'","")
+				caminho.append(c)
+				peso.append(p)
+			caminho.append("")
+			peso.append("")
+
+		arquivo['# da Simulação'] = n
+		arquivo['Origem->Destino'] = origemDest
+		arquivo['Caminho'] = caminho
+		arquivo['Peso'] = peso
+
+		arquivo.to_csv('simulation/simulacao.csv',index=False)
+
+		self.win.destroy()
 
 	def aviso(self,text):
 		self.win = tk.Toplevel()
@@ -371,17 +475,34 @@ class Rede(tk.Frame):
 		self.image = self.img_ok
 		k.place(relx=.5, rely=.76, anchor="c")
 
-	def salvar_Topologia(self):
+	def garbage_collector(self):
+		indexToDelete = []
 		for i in range(len(self.listadeNos)):
 			if self.listadeNos[i].on == False:
-				self.listadeNos.remove(self.listadeNos[i])
+				indexToDelete.append(i)
+
+		for i in range(len(indexToDelete)):
+			self.listadeNos.remove(self.listadeNos[indexToDelete[i]])
+
+		
+		for i in range(len(self.listadeNos)):
+			indexToDelete = []		
 			for j in range(len(self.listadeNos[i].arestasAdj)):
 				if(self.listadeNos[i].arestasAdj[j].on == False):
-					self.listadeNos[i].arestasAdj.remove(self.listadeNos[i].arestasAdj[j])
+					indexToDelete.append(j)
+			for k in range(len(indexToDelete)):
+				self.listadeNos[i].arestasAdj.remove(self.listadeNos[i].arestasAdj[indexToDelete[k]])
+
+		indexToDelete = []
 
 		for i in range(len(self.listadeArestas)):
 			if self.listadeArestas[i].on == False:
-				self.listadeArestas.remove(self.listadeArestas[i])
+				indexToDelete.append(i)
+
+		for i in range(len(indexToDelete)):
+				self.listadeArestas.remove(self.listadeArestas[indexToDelete[i]])
+	def salvar_Topologia(self):
+		garbage_collector()
 
 		self.win = tk.Toplevel()
 		self.win.wm_title("Salvar Topologia")
@@ -532,8 +653,8 @@ class Rede(tk.Frame):
 		import random
 		self.image_1 = No(self.canvas, "pc.png", random.randint(20,100), random.randint(20,100), cont)
 		self.listadeNos.append(self.image_1)
-		print("--------------------------")
-		print(self.listadeNos)
+		# print("--------------------------")
+		# print(self.listadeNos)
 
 def main():
 	app_win = tk.Tk()
