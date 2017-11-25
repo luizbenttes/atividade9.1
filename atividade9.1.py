@@ -21,6 +21,7 @@ class Aresta(object):
 		self.No1 = No1
 		self.No2 = No2
 		self.valorLambda = valorLambda
+		self.canaisLambda = [0 for i in range(self.valorLambda)]
 		self.canvas = canvas
 		self.lista = lista
 		self.message = tk.StringVar()
@@ -343,6 +344,7 @@ class Rede(tk.Frame):
 		for i in range(len(self.listadeArestas)):
 			if(self.listadeArestas[i].on):
 				self.listadeArestas[i].valorLambda = novoLambda
+				self.listadeArestas[i].canaisLambda = [0 for i in range(novoLambda)]
 		self.win.destroy()
 
 	def tela_simulacao(self):
@@ -382,14 +384,13 @@ class Rede(tk.Frame):
 			pesoCaminho.append((caminhos[i] , custo))
 		return pesoCaminho
 	
-	def dijkstra(self, grafo, origem, dest, visited=[], distances={}, predecessors={}):
+	def dijkstra(self, grafo, origem, dest, caminhosDijkstra, visited=[], distances={}, predecessors={}):
 		if origem == dest:
 			path=[]
 			pred=dest
 			while pred != None:
-				path.append(pred)
+				caminhosDijkstra.append(pred)
 				pred=predecessors.get(pred,None)
-			print('Menor caminho: '+str(path)+" custo = "+str(distances[dest])) 
 		else :     
 			if not visited: 
 				distances[origem] = 0
@@ -405,7 +406,45 @@ class Rede(tk.Frame):
 				if k not in visited:
 					unvisited[k] = distances.get(k,float('inf'))
 			x = min(unvisited, key=unvisited.get)
-			self.dijkstra(grafo, x, dest, visited, distances, predecessors)
+			self.dijkstra(grafo, x, dest, caminhosDijkstra, visited, distances, predecessors,)
+
+	def firstFit(self,no1,no2):
+		chamadaConcluida = False
+		
+		caminhoDijkstra = []
+		pLambda = 0
+		self.dijkstra(self.dic_adj, no1, no2, caminhoDijkstra, visited=[], distances={}, predecessors={})
+		
+		posicaoLivre = []
+		self.posicaoLambda = 0
+		while (self.posicaoLambda != self.listadeArestas[0].valorLambda):
+			posicaoAresta = []
+			for j in range(len(caminhoDijkstra)-1):
+				a = caminhoDijkstra[j]
+				b = caminhoDijkstra[j+1]
+				#print(a,b)
+				for k in range(len(self.listadeArestas)):
+					if (((self.listadeArestas[k].No1 == a) and (self.listadeArestas[k].No2 == b)) or ((self.listadeArestas[k].No1 == b) and (self.listadeArestas[k].No2 == a))):	
+						posicaoAresta.append(k)
+				if (self.listadeArestas[posicaoAresta[len(posicaoAresta)-1]].canaisLambda[self.posicaoLambda] == 0):
+					posicaoLivre.append(self.posicaoLambda)
+					#print("Posicao Livre:", posicaoLivre)
+
+			if(len(posicaoLivre) == len(caminhoDijkstra)-1):
+				#print(caminhoDijkstra,self.posicaoLambda)
+				for k in range(len(posicaoAresta)):
+					self.listadeArestas[posicaoAresta[k]].canaisLambda[posicaoLivre[0]] = 1
+					pLambda = posicaoLivre[0]
+					self.posicaoLambda = self.listadeArestas[0].valorLambda
+				chamadaConcluida = True
+			else:
+				self.posicaoLambda += 1
+				posicaoLivre = []
+		# for v in range(len(self.listadeArestas)):
+		# 	print("Aresta: ",self.listadeArestas[v].No1," to ",self.listadeArestas[v].No2,":",self.listadeArestas[v].canaisLambda)
+
+		#print("Chamadas: ",self.chamadasConcluida)
+		return caminhoDijkstra,pLambda,chamadaConcluida
 
 	def simulacao(self):
 		arquivo = pd.DataFrame()
@@ -418,6 +457,29 @@ class Rede(tk.Frame):
 		origemDest = []
 		caminho    = []
 		peso       = []
+		perdida    = []
+
+		firstFit = pd.DataFrame()
+		firstFit["# Chamada"] = 0
+		firstFit["Origem->Destino"] = 0
+		firstFit["Caminho Dijstra"] = 0
+		firstFit['Peso'] = 0
+		firstFit['Lambda Usado'] = 0
+		firstFit['Chamada Aceita?'] = 0
+
+		numChamadaFirst = []
+		lambdaUsado = []
+		chamadaAceita = []
+		origemDestFisrt = []
+		caminhoD = []
+		pesoD = []
+
+		# simulacoes = pd.DataFrame()
+		# simulacoes['#'] = 0
+		# simulacoes['Valor Lambda'] = 0
+		# simulacoes['Chamadas Requisitadas'] = 0
+		# simulacoes['Chamadas Perdidas'] = 0
+		# simulacoes['Probabilidade de Bloqueio'] = 0
 
 		nChamadas = int(self.numeroChamadas.get())
 		for i in range(nChamadas):
@@ -427,10 +489,30 @@ class Rede(tk.Frame):
 			while no1 == no2:
 				no2 = rd.randint(0,len(self.listadeNos)-1)
 
-			self.dijkstra(self.dic_adj, no1, no2,visited=[], distances={}, predecessors={})
+			caminhoDijkstra, pLambda, chamadaConcluida = self.firstFit(no1,no2)
+
+			#alimentacao csv fisrt fit:
+			numChamadaFirst.append(i)
+			lambdaUsado.append(pLambda)
+			chamadaAceita.append(chamadaConcluida)
+			origemDestFisrt.append(str(self.listadeNos[no1].nome_No)+"->"+str(self.listadeNos[no2].nome_No))
 
 			caminhos = list(self.caminhos(self.grafo_adj, no1, no2))
+			aux = []
+			aux.append(caminhoDijkstra)
 			td = self.pesos(self.grafo, caminhos)
+			dj = self.pesos(self.grafo, aux)
+			aux = []
+			c,p = dj[0][0],dj[0][1]
+			for k in range(len(c)):
+					c[k] = self.listadeNos[int(c[k])].nome_No
+			c = str(c)
+			c = c.replace(",","->")
+			c = c.replace("[","")
+			c = c.replace("]","")
+			c = c.replace("'","")
+			caminhoD.append(c)
+			pesoD.append(p)
 
 			for j in range(len(caminhos)):
 				n.append(i)
@@ -457,8 +539,32 @@ class Rede(tk.Frame):
 		arquivo['Caminho'] = caminho
 		arquivo['Peso'] = peso
 
+		numChamadaFirst.append("")
+		origemDestFisrt.append("")
+		caminhoD.append("")
+		pesoD.append("")
+		# lambdaUsado.append("")
+		# chamadaAceita.append("")
+
+		lambdaUsado.append("PB: ")
+		rec = 0
+		for i in range(len(chamadaAceita)):
+			if chamadaAceita[i]==False:
+				rec += 1
+		pblock = (nChamadas*rec)/100
+		chamadaAceita.append(pblock)
+		firstFit['# Chamada'] = numChamadaFirst
+		firstFit["Origem->Destino"] = origemDestFisrt
+		firstFit["Caminho Dijstra"] = caminhoD
+		firstFit['Peso'] = pesoD
+		firstFit['Lambda Usado'] = lambdaUsado
+		firstFit['Chamada Aceita?'] = chamadaAceita
+
+
+		firstFit.to_csv('simulation/simulacaoFirstFit.csv',index=False)
 		arquivo.to_csv('simulation/simulacao.csv',index=False)
 
+		self.csv_simulacao = arquivo
 		self.win.destroy()
 
 	def aviso(self,text):
@@ -523,9 +629,9 @@ class Rede(tk.Frame):
 
 	def criar_Dataframe(self):
 		arquivo = pd.DataFrame()
-		arquivo['Nome'] = 0
-		arquivo['Px'] = 0
-		arquivo['Py'] = 0
+		arquivo['Nome'] 	   = 0
+		arquivo['Px'] 		   = 0
+		arquivo['Py'] 		   = 0
 		arquivo['Adjacencias'] = 0
 
 		nome = []

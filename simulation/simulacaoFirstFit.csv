@@ -1,0 +1,1002 @@
+# Chamada,Origem->Destino,Caminho Dijstra,Peso,Lambda Usado,Chamada Aceita?
+0,D->Q,Q-> F-> A-> C-> D,350,0,True
+1,R->B,B-> F-> A-> I-> R,380,1,True
+2,R->B,B-> F-> A-> I-> R,380,2,True
+3,O->P,P-> O,90,0,True
+4,J->Q,Q-> G-> I-> R-> J,370,0,True
+5,C->I,I-> A-> C,220,3,True
+6,J->H,H-> G-> I-> R-> J,390,3,True
+7,M->D,D-> N-> M,210,0,True
+8,N->M,M-> N,100,1,True
+9,O->I,I-> A-> F-> P-> O,400,4,True
+10,L->C,C-> A-> I-> R-> J-> L,550,5,True
+11,M->D,D-> N-> M,210,2,True
+12,G->A,A-> G,100,0,True
+13,P->G,G-> A-> F-> P,290,3,True
+14,B->P,P-> F-> B,180,0,True
+15,P->N,N-> M-> O-> P,290,3,True
+16,O->N,N-> M-> O,200,4,True
+17,Q->P,P-> F-> Q,200,1,True
+18,R->M,M-> N-> A-> I-> R,460,6,True
+19,N->A,A-> N,150,0,True
+20,F->Q,Q-> F,100,2,True
+21,D->A,A-> C-> D,160,1,True
+22,Q->C,C-> A-> F-> Q,290,6,True
+23,H->C,C-> A-> G-> H,320,2,True
+24,J->L,L-> J,150,0,True
+25,B->N,N-> E-> F-> B,280,3,True
+26,M->E,E-> N-> M,200,5,True
+27,P->C,C-> A-> F-> P,290,7,True
+28,M->Q,Q-> F-> P-> O-> M,390,5,True
+29,I->Q,Q-> G-> I,190,1,True
+30,Q->B,B-> F-> Q,180,4,True
+31,I->M,M-> N-> A-> I,370,7,True
+32,E->P,P-> F-> E,200,2,True
+33,P->H,H-> F-> P,240,6,True
+34,J->R,R-> J,90,1,True
+35,H->P,P-> F-> H,240,8,True
+36,M->D,D-> N-> M,210,8,True
+37,O->Q,Q-> F-> P-> O,290,9,True
+38,D->Q,Q-> F-> A-> C-> D,350,8,True
+39,C->I,I-> A-> C,220,9,True
+40,B->N,N-> E-> F-> B,280,6,True
+41,J->H,H-> G-> I-> R-> J,390,4,True
+42,B->J,J-> R-> I-> A-> F-> B,470,10,True
+43,P->A,A-> F-> P,190,11,True
+44,E->R,R-> I-> A-> F-> E,400,12,True
+45,C->R,R-> I-> A-> C,310,11,True
+46,E->N,N-> E,100,0,True
+47,N->I,I-> A-> N,270,8,True
+48,G->J,J-> R-> I-> G,270,7,True
+49,O->A,A-> F-> P-> O,280,13,True
+50,P->L,L-> J-> R-> I-> A-> F-> P,640,14,True
+51,O->R,R-> I-> A-> F-> P-> O,490,15,True
+52,R->C,C-> A-> I-> R,310,13,True
+53,G->M,M-> N-> A-> G,350,9,True
+54,N->F,F-> E-> N,200,1,True
+55,I->F,F-> A-> I,210,16,True
+56,G->L,L-> J-> R-> I-> G,420,8,True
+57,D->B,B-> F-> A-> C-> D,330,17,True
+58,C->N,N-> D-> C,170,3,True
+59,Q->D,D-> C-> A-> F-> Q,350,18,True
+60,M->Q,Q-> F-> P-> O-> M,390,10,True
+61,E->N,N-> E,100,2,True
+62,N->O,O-> M-> N,200,11,True
+63,O->P,P-> O,90,1,True
+64,Q->P,P-> F-> Q,200,12,True
+65,M->R,R-> I-> A-> N-> M,460,17,True
+66,C->G,G-> A-> C,200,4,True
+67,E->L,L-> J-> R-> I-> A-> F-> E,640,19,True
+68,F->E,E-> F,100,0,True
+69,I->D,D-> C-> A-> I,280,20,True
+70,D->N,N-> D,110,1,True
+71,G->D,D-> C-> A-> G,260,10,True
+72,O->H,H-> F-> P-> O,330,16,True
+73,B->H,H-> F-> B,220,5,True
+74,P->N,N-> M-> O-> P,290,12,True
+75,C->H,H-> G-> A-> C,320,12,True
+76,I->L,L-> J-> R-> I,330,9,True
+77,E->I,I-> A-> F-> E,310,21,True
+78,J->L,L-> J,150,1,True
+79,C->O,O-> M-> N-> D-> C,370,13,True
+80,Q->M,M-> O-> P-> F-> Q,390,17,True
+81,N->M,M-> N,100,10,True
+82,I->G,G-> I,90,2,True
+83,D->P,P-> F-> A-> C-> D,350,22,True
+84,D->G,G-> A-> C-> D,260,14,True
+85,P->Q,Q-> F-> P,200,19,True
+86,M->Q,Q-> F-> P-> O-> M,390,20,True
+87,E->M,M-> N-> E,200,14,True
+88,I->A,A-> I,120,0,True
+89,J->B,B-> F-> A-> I-> R-> J,470,23,True
+90,H->O,O-> P-> F-> H,330,18,True
+91,I->L,L-> J-> R-> I,330,16,True
+92,I->M,M-> N-> A-> I,370,18,True
+93,A->R,R-> I-> A,210,22,True
+94,Q->N,N-> E-> F-> Q,300,7,True
+95,A->I,I-> A,120,24,True
+96,L->P,P-> F-> A-> I-> R-> J-> L,640,25,True
+97,N->Q,Q-> F-> E-> N,300,11,True
+98,R->J,J-> R,90,2,True
+99,H->M,M-> O-> P-> F-> H,430,21,True
+100,E->F,F-> E,100,4,True
+101,I->J,J-> R-> I,180,18,True
+102,J->R,R-> J,90,6,True
+103,P->O,O-> P,90,2,True
+104,C->D,D-> C,60,2,True
+105,I->F,F-> A-> I,210,26,True
+106,D->H,H-> G-> A-> C-> D,380,15,True
+107,A->M,M-> N-> A,250,15,True
+108,E->D,D-> N-> E,210,4,True
+109,C->L,L-> J-> R-> I-> A-> C,550,27,True
+110,B->A,A-> F-> B,170,9,True
+111,M->P,P-> O-> M,190,6,True
+112,Q->R,R-> I-> G-> Q,280,20,True
+113,C->Q,Q-> F-> A-> C,290,24,True
+114,H->L,L-> J-> R-> I-> G-> H,540,21,True
+115,B->Q,Q-> F-> B,180,13,True
+116,P->E,E-> F-> P,200,23,True
+117,I->P,P-> F-> A-> I,310,28,True
+118,N->P,P-> O-> M-> N,290,19,True
+119,R->H,H-> G-> I-> R,300,24,True
+120,G->O,O-> P-> F-> A-> G,380,27,True
+121,N->R,R-> I-> A-> N,360,29,True
+122,H->B,B-> F-> H,220,7,True
+123,G->E,E-> F-> A-> G,290,5,True
+124,Q->N,N-> E-> F-> Q,300,15,True
+125,A->M,M-> N-> A,250,16,True
+126,J->R,R-> J,90,11,True
+127,E->I,I-> A-> F-> E,310,30,True
+128,E->G,G-> A-> F-> E,290,20,True
+129,Q->R,R-> I-> G-> Q,280,26,True
+130,B->M,M-> O-> P-> F-> B,370,24,True
+131,O->F,F-> P-> O,190,26,True
+132,D->R,R-> I-> A-> C-> D,370,31,True
+133,D->P,P-> F-> A-> C-> D,350,29,True
+134,R->B,B-> F-> A-> I-> R,380,32,True
+135,I->L,L-> J-> R-> I,330,28,True
+136,C->J,J-> R-> I-> A-> C,400,33,True
+137,Q->H,H-> G-> Q,220,5,True
+138,E->J,J-> R-> I-> A-> F-> E,490,34,True
+139,B->D,D-> C-> A-> F-> B,330,35,True
+140,N->Q,Q-> F-> E-> N,300,16,True
+141,M->C,C-> D-> N-> M,270,21,True
+142,O->P,P-> O,90,7,True
+143,O->I,I-> A-> F-> P-> O,400,36,True
+144,O->B,B-> F-> P-> O,270,30,True
+145,N->P,P-> O-> M-> N,290,22,True
+146,M->I,I-> A-> N-> M,370,35,True
+147,A->G,G-> A,100,1,True
+148,J->B,B-> F-> A-> I-> R-> J,470,37,True
+149,M->I,I-> A-> N-> M,370,38,True
+150,N->P,P-> O-> M-> N,290,23,True
+151,O->E,E-> F-> P-> O,290,31,True
+152,B->A,A-> F-> B,170,31,True
+153,E->R,R-> I-> A-> F-> E,400,39,True
+154,M->H,H-> F-> P-> O-> M,430,32,True
+155,F->P,P-> F,100,33,True
+156,D->I,I-> A-> C-> D,280,40,True
+157,J->H,H-> G-> I-> R-> J,390,30,True
+158,C->J,J-> R-> I-> A-> C,400,41,True
+159,G->P,P-> F-> A-> G,290,38,True
+160,H->O,O-> P-> F-> H,330,34,True
+161,G->I,I-> G,90,5,True
+162,I->B,B-> F-> A-> I,290,42,True
+163,J->N,N-> A-> I-> R-> J,450,43,True
+164,O->J,J-> R-> I-> A-> F-> P-> O,580,44,True
+165,L->N,N-> A-> I-> R-> J-> L,600,45,True
+166,C->D,D-> C,60,4,True
+167,Q->N,N-> E-> F-> Q,300,22,True
+168,C->F,F-> A-> C,190,43,True
+169,Q->J,J-> R-> I-> G-> Q,370,35,True
+170,I->G,G-> I,90,6,True
+171,I->G,G-> I,90,9,True
+172,C->E,E-> N-> D-> C,270,9,True
+173,I->O,O-> P-> F-> A-> I,400,46,True
+174,L->H,H-> G-> I-> R-> J-> L,540,36,True
+175,L->A,A-> I-> R-> J-> L,450,47,True
+176,F->P,P-> F,100,35,True
+177,L->J,J-> L,150,2,True
+178,M->B,B-> F-> P-> O-> M,370,39,True
+179,O->E,E-> F-> P-> O,290,37,True
+180,C->F,F-> A-> C,190,45,True
+181,A->F,F-> A,90,33,True
+182,D->L,L-> J-> R-> I-> A-> C-> D,610,48,True
+183,Q->C,C-> A-> F-> Q,290,47,True
+184,Q->F,F-> Q,100,3,True
+185,B->G,G-> A-> F-> B,270,40,True
+186,P->M,M-> O-> P,190,8,True
+187,O->B,B-> F-> P-> O,270,41,True
+188,F->M,M-> O-> P-> F,290,40,True
+189,E->P,P-> F-> E,200,42,True
+190,N->F,F-> E-> N,200,8,True
+191,J->H,H-> G-> I-> R-> J,390,38,True
+192,L->Q,Q-> G-> I-> R-> J-> L,520,40,True
+193,O->H,H-> F-> P-> O,330,43,True
+194,L->P,P-> F-> A-> I-> R-> J-> L,640,49,True
+195,P->Q,Q-> F-> P,200,45,True
+196,C->M,M-> N-> D-> C,270,24,True
+197,N->P,P-> O-> M-> N,290,25,True
+198,J->I,I-> R-> J,180,42,True
+199,N->M,M-> N,100,20,True
+200,Q->R,R-> I-> G-> Q,280,46,True
+201,B->H,H-> F-> B,220,11,True
+202,J->I,I-> R-> J,180,50,True
+203,G->H,H-> G,120,0,True
+204,C->I,I-> A-> C,220,50,True
+205,N->J,J-> R-> I-> A-> N,450,51,True
+206,P->G,G-> A-> F-> P,290,48,True
+207,E->C,C-> D-> N-> E,270,12,True
+208,J->G,G-> I-> R-> J,270,52,True
+209,O->Q,Q-> F-> P-> O,290,50,True
+210,J->E,E-> F-> A-> I-> R-> J,490,53,True
+211,M->F,F-> P-> O-> M,290,47,True
+212,O->L,L-> J-> R-> I-> A-> F-> P-> O,730,54,True
+213,E->H,H-> F-> E,240,9,True
+214,C->P,P-> F-> A-> C,290,51,True
+215,H->D,D-> C-> A-> G-> H,380,16,True
+216,R->A,A-> I-> R,210,55,True
+217,D->O,O-> M-> N-> D,310,26,True
+218,J->C,C-> A-> I-> R-> J,400,56,True
+219,O->B,B-> F-> P-> O,270,52,True
+220,A->N,N-> A,150,1,True
+221,J->B,B-> F-> A-> I-> R-> J,470,57,True
+222,M->C,C-> D-> N-> M,270,27,True
+223,O->E,E-> F-> P-> O,290,55,True
+224,A->N,N-> A,150,2,True
+225,F->L,L-> J-> R-> I-> A-> F,540,58,True
+226,N->G,G-> A-> N,250,11,True
+227,Q->L,L-> J-> R-> I-> G-> Q,520,59,True
+228,H->Q,Q-> G-> H,220,6,True
+229,H->M,M-> O-> P-> F-> H,430,53,True
+230,P->M,M-> O-> P,190,14,True
+231,J->M,M-> N-> A-> I-> R-> J,550,60,True
+232,G->F,F-> A-> G,190,41,True
+233,G->R,R-> I-> G,180,61,True
+234,J->O,O-> P-> F-> A-> I-> R-> J,580,62,True
+235,E->D,D-> N-> E,210,10,True
+236,F->G,G-> A-> F,190,50,True
+237,C->R,R-> I-> A-> C,310,63,True
+238,D->G,G-> A-> C-> D,260,19,True
+239,H->C,C-> A-> G-> H,320,23,True
+240,Q->P,P-> F-> Q,200,56,True
+241,G->F,F-> A-> G,190,52,True
+242,N->H,H-> F-> E-> N,340,13,True
+243,O->M,M-> O,100,0,True
+244,A->D,D-> C-> A,160,25,True
+245,Q->D,D-> C-> A-> F-> Q,350,55,True
+246,G->B,B-> F-> A-> G,270,56,True
+247,F->G,G-> A-> F,190,59,True
+248,B->I,I-> A-> F-> B,290,61,True
+249,M->I,I-> A-> N-> M,370,52,True
+250,G->O,O-> P-> F-> A-> G,380,60,True
+251,E->A,A-> F-> E,190,63,True
+252,J->F,F-> A-> I-> R-> J,390,64,True
+253,N->O,O-> M-> N,200,28,True
+254,C->L,L-> J-> R-> I-> A-> C,550,65,True
+255,Q->N,N-> E-> F-> Q,300,25,True
+256,M->E,E-> N-> M,200,29,True
+257,O->G,G-> A-> F-> P-> O,380,65,True
+258,N->D,D-> N,110,5,True
+259,P->R,R-> I-> A-> F-> P,400,66,True
+260,C->E,E-> N-> D-> C,270,23,True
+261,I->F,F-> A-> I,210,67,True
+262,M->P,P-> O-> M,190,29,True
+263,I->P,P-> F-> A-> I,310,68,True
+264,I->D,D-> C-> A-> I,280,59,True
+265,F->J,J-> R-> I-> A-> F,390,69,True
+266,D->M,M-> N-> D,210,30,True
+267,A->F,F-> A,90,70,True
+268,N->A,A-> N,150,3,True
+269,C->R,R-> I-> A-> C,310,70,True
+270,O->A,A-> F-> P-> O,280,71,True
+271,P->D,D-> C-> A-> F-> P,350,72,True
+272,E->M,M-> N-> E,200,31,True
+273,M->B,B-> F-> P-> O-> M,370,58,True
+274,O->D,D-> N-> M-> O,310,33,True
+275,P->C,C-> A-> F-> P,290,73,True
+276,R->N,N-> A-> I-> R,360,71,True
+277,B->N,N-> E-> F-> B,280,18,True
+278,N->M,M-> N,100,32,True
+279,R->N,N-> A-> I-> R,360,72,True
+280,D->A,A-> C-> D,160,26,True
+281,P->L,L-> J-> R-> I-> A-> F-> P,640,74,True
+282,P->C,C-> A-> F-> P,290,75,True
+283,H->G,G-> H,120,1,True
+284,J->D,D-> C-> A-> I-> R-> J,460,76,True
+285,B->M,M-> O-> P-> F-> B,370,59,True
+286,Q->A,A-> F-> Q,190,76,True
+287,B->O,O-> P-> F-> B,270,63,True
+288,H->O,O-> P-> F-> H,330,57,True
+289,B->O,O-> P-> F-> B,270,64,True
+290,Q->R,R-> I-> G-> Q,280,67,True
+291,P->Q,Q-> F-> P,200,61,True
+292,N->J,J-> R-> I-> A-> N,450,73,True
+293,H->I,I-> G-> H,210,10,True
+294,I->A,A-> I,120,75,True
+295,C->M,M-> N-> D-> C,270,34,True
+296,I->B,B-> F-> A-> I,290,77,True
+297,O->D,D-> N-> M-> O,310,36,True
+298,J->B,B-> F-> A-> I-> R-> J,470,78,True
+299,N->Q,Q-> F-> E-> N,300,26,True
+300,Q->H,H-> G-> Q,220,7,True
+301,D->H,H-> G-> A-> C-> D,380,28,True
+302,O->J,J-> R-> I-> A-> F-> P-> O,580,79,True
+303,R->C,C-> A-> I-> R,310,0,False
+304,O->G,G-> A-> F-> P-> O,380,0,False
+305,N->A,A-> N,150,4,True
+306,M->Q,Q-> F-> P-> O-> M,390,67,True
+307,F->P,P-> F,100,69,True
+308,M->E,E-> N-> M,200,37,True
+309,L->D,D-> C-> A-> I-> R-> J-> L,610,0,False
+310,N->A,A-> N,150,5,True
+311,N->C,C-> D-> N,170,6,True
+312,P->M,M-> O-> P,190,35,True
+313,I->C,C-> A-> I,220,0,False
+314,C->O,O-> M-> N-> D-> C,370,41,True
+315,R->P,P-> F-> A-> I-> R,400,0,False
+316,L->J,J-> L,150,3,True
+317,M->H,H-> F-> P-> O-> M,430,70,True
+318,F->C,C-> A-> F,190,0,False
+319,N->D,D-> N,110,7,True
+320,N->D,D-> N,110,11,True
+321,H->G,G-> H,120,8,True
+322,D->P,P-> F-> A-> C-> D,350,0,False
+323,M->L,L-> J-> R-> I-> A-> N-> M,700,0,False
+324,M->F,F-> P-> O-> M,290,76,True
+325,F->J,J-> R-> I-> A-> F,390,0,False
+326,E->D,D-> N-> E,210,17,True
+327,B->D,D-> C-> A-> F-> B,330,0,False
+328,E->A,A-> F-> E,190,0,False
+329,G->I,I-> G,90,11,True
+330,I->P,P-> F-> A-> I,310,0,False
+331,H->N,N-> E-> F-> H,340,24,True
+332,A->M,M-> N-> A,250,39,True
+333,L->B,B-> F-> A-> I-> R-> J-> L,620,0,False
+334,I->J,J-> R-> I,180,68,True
+335,R->F,F-> A-> I-> R,300,0,False
+336,M->E,E-> N-> M,200,40,True
+337,D->A,A-> C-> D,160,30,True
+338,L->D,D-> C-> A-> I-> R-> J-> L,610,0,False
+339,D->C,C-> D,60,5,True
+340,F->P,P-> F,100,77,True
+341,R->L,L-> J-> R,240,12,True
+342,M->Q,Q-> F-> P-> O-> M,390,78,True
+343,M->G,G-> A-> N-> M,350,42,True
+344,B->L,L-> J-> R-> I-> A-> F-> B,620,0,False
+345,E->H,H-> F-> E,240,10,True
+346,A->Q,Q-> F-> A,190,0,False
+347,F->A,A-> F,90,0,False
+348,Q->H,H-> G-> Q,220,9,True
+349,R->H,H-> G-> I-> R,300,75,True
+350,B->M,M-> O-> P-> F-> B,370,0,False
+351,C->L,L-> J-> R-> I-> A-> C,550,0,False
+352,N->G,G-> A-> N,250,13,True
+353,A->G,G-> A,100,6,True
+354,L->D,D-> C-> A-> I-> R-> J-> L,610,0,False
+355,B->C,C-> A-> F-> B,270,0,False
+356,F->M,M-> O-> P-> F,290,0,False
+357,C->O,O-> M-> N-> D-> C,370,43,True
+358,O->F,F-> P-> O,190,0,False
+359,G->J,J-> R-> I-> G,270,77,True
+360,P->Q,Q-> F-> P,200,0,False
+361,F->H,H-> F,140,0,True
+362,P->O,O-> P,90,11,True
+363,B->L,L-> J-> R-> I-> A-> F-> B,620,0,False
+364,O->J,J-> R-> I-> A-> F-> P-> O,580,0,False
+365,F->J,J-> R-> I-> A-> F,390,0,False
+366,R->L,L-> J-> R,240,13,True
+367,J->E,E-> F-> A-> I-> R-> J,490,0,False
+368,L->J,J-> L,150,4,True
+369,I->M,M-> N-> A-> I,370,0,False
+370,O->D,D-> N-> M-> O,310,44,True
+371,I->E,E-> F-> A-> I,310,0,False
+372,D->H,H-> G-> A-> C-> D,380,32,True
+373,Q->I,I-> G-> Q,190,12,True
+374,P->N,N-> M-> O-> P,290,45,True
+375,Q->F,F-> Q,100,14,True
+376,Q->J,J-> R-> I-> G-> Q,370,0,False
+377,F->C,C-> A-> F,190,0,False
+378,F->E,E-> F,100,14,True
+379,R->Q,Q-> G-> I-> R,280,0,False
+380,L->H,H-> G-> I-> R-> J-> L,540,0,False
+381,N->E,E-> N,100,19,True
+382,A->Q,Q-> F-> A,190,0,False
+383,L->P,P-> F-> A-> I-> R-> J-> L,640,0,False
+384,C->A,A-> C,100,21,True
+385,A->L,L-> J-> R-> I-> A,450,0,False
+386,R->C,C-> A-> I-> R,310,0,False
+387,F->M,M-> O-> P-> F,290,0,False
+388,L->Q,Q-> G-> I-> R-> J-> L,520,0,False
+389,F->I,I-> A-> F,210,0,False
+390,R->D,D-> C-> A-> I-> R,370,0,False
+391,C->Q,Q-> F-> A-> C,290,0,False
+392,I->O,O-> P-> F-> A-> I,400,0,False
+393,D->O,O-> M-> N-> D,310,46,True
+394,Q->I,I-> G-> Q,190,13,True
+395,D->O,O-> M-> N-> D,310,48,True
+396,B->A,A-> F-> B,170,0,False
+397,P->Q,Q-> F-> P,200,0,False
+398,M->B,B-> F-> P-> O-> M,370,0,False
+399,M->G,G-> A-> N-> M,350,47,True
+400,N->M,M-> N,100,49,True
+401,R->Q,Q-> G-> I-> R,280,0,False
+402,R->Q,Q-> G-> I-> R,280,0,False
+403,A->D,D-> C-> A,160,36,True
+404,J->B,B-> F-> A-> I-> R-> J,470,0,False
+405,E->O,O-> P-> F-> E,290,0,False
+406,G->I,I-> G,90,14,True
+407,I->R,R-> I,90,0,False
+408,N->D,D-> N,110,14,True
+409,I->D,D-> C-> A-> I,280,0,False
+410,J->E,E-> F-> A-> I-> R-> J,490,0,False
+411,O->G,G-> A-> F-> P-> O,380,0,False
+412,J->C,C-> A-> I-> R-> J,400,0,False
+413,C->R,R-> I-> A-> C,310,0,False
+414,G->C,C-> A-> G,200,34,True
+415,H->E,E-> F-> H,240,17,True
+416,D->R,R-> I-> A-> C-> D,370,0,False
+417,L->O,O-> P-> F-> A-> I-> R-> J-> L,730,0,False
+418,H->M,M-> O-> P-> F-> H,430,0,False
+419,O->R,R-> I-> A-> F-> P-> O,490,0,False
+420,R->H,H-> G-> I-> R,300,0,False
+421,L->C,C-> A-> I-> R-> J-> L,550,0,False
+422,R->A,A-> I-> R,210,0,False
+423,R->N,N-> A-> I-> R,360,0,False
+424,C->O,O-> M-> N-> D-> C,370,50,True
+425,G->E,E-> F-> A-> G,290,0,False
+426,I->P,P-> F-> A-> I,310,0,False
+427,G->L,L-> J-> R-> I-> G,420,0,False
+428,E->A,A-> F-> E,190,0,False
+429,N->E,E-> N,100,20,True
+430,O->G,G-> A-> F-> P-> O,380,0,False
+431,R->C,C-> A-> I-> R,310,0,False
+432,F->A,A-> F,90,0,False
+433,O->L,L-> J-> R-> I-> A-> F-> P-> O,730,0,False
+434,A->J,J-> R-> I-> A,300,0,False
+435,P->B,B-> F-> P,180,0,False
+436,N->B,B-> F-> E-> N,280,27,True
+437,M->J,J-> R-> I-> A-> N-> M,550,0,False
+438,M->R,R-> I-> A-> N-> M,460,0,False
+439,C->Q,Q-> F-> A-> C,290,0,False
+440,L->B,B-> F-> A-> I-> R-> J-> L,620,0,False
+441,M->Q,Q-> F-> P-> O-> M,390,0,False
+442,D->R,R-> I-> A-> C-> D,370,0,False
+443,O->I,I-> A-> F-> P-> O,400,0,False
+444,B->A,A-> F-> B,170,0,False
+445,O->Q,Q-> F-> P-> O,290,0,False
+446,D->R,R-> I-> A-> C-> D,370,0,False
+447,L->J,J-> L,150,6,True
+448,J->A,A-> I-> R-> J,300,0,False
+449,H->N,N-> E-> F-> H,340,28,True
+450,I->R,R-> I,90,0,False
+451,L->H,H-> G-> I-> R-> J-> L,540,0,False
+452,M->A,A-> N-> M,250,53,True
+453,M->D,D-> N-> M,210,51,True
+454,H->G,G-> H,120,11,True
+455,I->A,A-> I,120,0,False
+456,C->L,L-> J-> R-> I-> A-> C,550,0,False
+457,C->G,G-> A-> C,200,37,True
+458,R->F,F-> A-> I-> R,300,0,False
+459,F->I,I-> A-> F,210,0,False
+460,D->I,I-> A-> C-> D,280,0,False
+461,E->R,R-> I-> A-> F-> E,400,0,False
+462,M->O,O-> M,100,1,True
+463,H->Q,Q-> G-> H,220,14,True
+464,I->H,H-> G-> I,210,17,True
+465,N->M,M-> N,100,54,True
+466,A->C,C-> A,100,38,True
+467,N->I,I-> A-> N,270,0,False
+468,D->C,C-> D,60,7,True
+469,D->B,B-> F-> A-> C-> D,330,0,False
+470,M->F,F-> P-> O-> M,290,0,False
+471,M->H,H-> F-> P-> O-> M,430,0,False
+472,R->G,G-> I-> R,180,0,False
+473,I->C,C-> A-> I,220,0,False
+474,B->F,F-> B,80,8,True
+475,N->A,A-> N,150,10,True
+476,M->N,N-> M,100,55,True
+477,N->F,F-> E-> N,200,32,True
+478,I->M,M-> N-> A-> I,370,0,False
+479,Q->E,E-> F-> Q,200,29,True
+480,N->O,O-> M-> N,200,56,True
+481,C->R,R-> I-> A-> C,310,0,False
+482,D->H,H-> G-> A-> C-> D,380,39,True
+483,J->M,M-> N-> A-> I-> R-> J,550,0,False
+484,L->Q,Q-> G-> I-> R-> J-> L,520,0,False
+485,Q->I,I-> G-> Q,190,15,True
+486,D->C,C-> D,60,11,True
+487,O->F,F-> P-> O,190,0,False
+488,R->F,F-> A-> I-> R,300,0,False
+489,J->B,B-> F-> A-> I-> R-> J,470,0,False
+490,D->F,F-> A-> C-> D,250,0,False
+491,R->N,N-> A-> I-> R,360,0,False
+492,R->D,D-> C-> A-> I-> R,370,0,False
+493,M->D,D-> N-> M,210,57,True
+494,C->M,M-> N-> D-> C,270,58,True
+495,J->R,R-> J,90,15,True
+496,B->R,R-> I-> A-> F-> B,380,0,False
+497,E->R,R-> I-> A-> F-> E,400,0,False
+498,N->Q,Q-> F-> E-> N,300,33,True
+499,B->Q,Q-> F-> B,180,21,True
+500,N->C,C-> D-> N,170,37,True
+501,M->B,B-> F-> P-> O-> M,370,0,False
+502,M->L,L-> J-> R-> I-> A-> N-> M,700,0,False
+503,M->G,G-> A-> N-> M,350,61,True
+504,A->D,D-> C-> A,160,42,True
+505,E->N,N-> E,100,21,True
+506,P->L,L-> J-> R-> I-> A-> F-> P,640,0,False
+507,I->A,A-> I,120,0,False
+508,L->F,F-> A-> I-> R-> J-> L,540,0,False
+509,N->H,H-> F-> E-> N,340,35,True
+510,B->A,A-> F-> B,170,0,False
+511,O->A,A-> F-> P-> O,280,0,False
+512,J->P,P-> F-> A-> I-> R-> J,490,0,False
+513,G->N,N-> A-> G,250,21,True
+514,C->D,D-> C,60,33,True
+515,E->J,J-> R-> I-> A-> F-> E,490,0,False
+516,P->G,G-> A-> F-> P,290,0,False
+517,J->E,E-> F-> A-> I-> R-> J,490,0,False
+518,I->F,F-> A-> I,210,0,False
+519,M->J,J-> R-> I-> A-> N-> M,550,0,False
+520,H->G,G-> H,120,13,True
+521,O->D,D-> N-> M-> O,310,62,True
+522,R->Q,Q-> G-> I-> R,280,0,False
+523,I->C,C-> A-> I,220,0,False
+524,O->N,N-> M-> O,200,63,True
+525,I->F,F-> A-> I,210,0,False
+526,B->R,R-> I-> A-> F-> B,380,0,False
+527,R->I,I-> R,90,0,False
+528,G->O,O-> P-> F-> A-> G,380,0,False
+529,R->I,I-> R,90,0,False
+530,J->E,E-> F-> A-> I-> R-> J,490,0,False
+531,Q->D,D-> C-> A-> F-> Q,350,0,False
+532,N->R,R-> I-> A-> N,360,0,False
+533,P->C,C-> A-> F-> P,290,0,False
+534,O->Q,Q-> F-> P-> O,290,0,False
+535,D->B,B-> F-> A-> C-> D,330,0,False
+536,B->I,I-> A-> F-> B,290,0,False
+537,L->F,F-> A-> I-> R-> J-> L,540,0,False
+538,O->H,H-> F-> P-> O,330,0,False
+539,Q->L,L-> J-> R-> I-> G-> Q,520,0,False
+540,P->G,G-> A-> F-> P,290,0,False
+541,F->Q,Q-> F,100,23,True
+542,C->D,D-> C,60,38,True
+543,M->F,F-> P-> O-> M,290,0,False
+544,N->R,R-> I-> A-> N,360,0,False
+545,H->P,P-> F-> H,240,0,False
+546,C->A,A-> C,100,44,True
+547,J->Q,Q-> G-> I-> R-> J,370,0,False
+548,J->Q,Q-> G-> I-> R-> J,370,0,False
+549,R->B,B-> F-> A-> I-> R,380,0,False
+550,R->D,D-> C-> A-> I-> R,370,0,False
+551,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+552,B->M,M-> O-> P-> F-> B,370,0,False
+553,J->C,C-> A-> I-> R-> J,400,0,False
+554,I->B,B-> F-> A-> I,290,0,False
+555,F->Q,Q-> F,100,27,True
+556,C->N,N-> D-> C,170,45,True
+557,H->O,O-> P-> F-> H,330,0,False
+558,E->D,D-> N-> E,210,38,True
+559,B->F,F-> B,80,12,True
+560,B->A,A-> F-> B,170,0,False
+561,R->G,G-> I-> R,180,0,False
+562,M->Q,Q-> F-> P-> O-> M,390,0,False
+563,O->H,H-> F-> P-> O,330,0,False
+564,F->A,A-> F,90,0,False
+565,G->N,N-> A-> G,250,22,True
+566,E->M,M-> N-> E,200,59,True
+567,D->H,H-> G-> A-> C-> D,380,46,True
+568,M->G,G-> A-> N-> M,350,64,True
+569,Q->D,D-> C-> A-> F-> Q,350,0,False
+570,R->D,D-> C-> A-> I-> R,370,0,False
+571,H->M,M-> O-> P-> F-> H,430,0,False
+572,N->L,L-> J-> R-> I-> A-> N,600,0,False
+573,I->B,B-> F-> A-> I,290,0,False
+574,O->I,I-> A-> F-> P-> O,400,0,False
+575,F->G,G-> A-> F,190,0,False
+576,J->C,C-> A-> I-> R-> J,400,0,False
+577,I->O,O-> P-> F-> A-> I,400,0,False
+578,M->F,F-> P-> O-> M,290,0,False
+579,G->A,A-> G,100,7,True
+580,F->I,I-> A-> F,210,0,False
+581,N->G,G-> A-> N,250,24,True
+582,G->M,M-> N-> A-> G,350,66,True
+583,E->J,J-> R-> I-> A-> F-> E,490,0,False
+584,G->O,O-> P-> F-> A-> G,380,0,False
+585,H->E,E-> F-> H,240,36,True
+586,I->A,A-> I,120,0,False
+587,H->A,A-> G-> H,220,18,True
+588,C->Q,Q-> F-> A-> C,290,0,False
+589,O->I,I-> A-> F-> P-> O,400,0,False
+590,P->F,F-> P,100,0,False
+591,P->R,R-> I-> A-> F-> P,400,0,False
+592,O->I,I-> A-> F-> P-> O,400,0,False
+593,H->F,F-> H,140,1,True
+594,P->L,L-> J-> R-> I-> A-> F-> P,640,0,False
+595,F->H,H-> F,140,2,True
+596,M->I,I-> A-> N-> M,370,0,False
+597,Q->L,L-> J-> R-> I-> G-> Q,520,0,False
+598,R->B,B-> F-> A-> I-> R,380,0,False
+599,R->N,N-> A-> I-> R,360,0,False
+600,P->L,L-> J-> R-> I-> A-> F-> P,640,0,False
+601,A->E,E-> F-> A,190,0,False
+602,N->G,G-> A-> N,250,25,True
+603,O->Q,Q-> F-> P-> O,290,0,False
+604,I->G,G-> I,90,16,True
+605,F->I,I-> A-> F,210,0,False
+606,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+607,H->J,J-> R-> I-> G-> H,390,0,False
+608,J->A,A-> I-> R-> J,300,0,False
+609,E->A,A-> F-> E,190,0,False
+610,I->A,A-> I,120,0,False
+611,J->H,H-> G-> I-> R-> J,390,0,False
+612,A->E,E-> F-> A,190,0,False
+613,F->J,J-> R-> I-> A-> F,390,0,False
+614,H->B,B-> F-> H,220,14,True
+615,P->M,M-> O-> P,190,38,True
+616,Q->G,G-> Q,100,2,True
+617,Q->L,L-> J-> R-> I-> G-> Q,520,0,False
+618,N->H,H-> F-> E-> N,340,41,True
+619,F->R,R-> I-> A-> F,300,0,False
+620,A->D,D-> C-> A,160,49,True
+621,E->P,P-> F-> E,200,0,False
+622,B->Q,Q-> F-> B,180,28,True
+623,P->D,D-> C-> A-> F-> P,350,0,False
+624,D->P,P-> F-> A-> C-> D,350,0,False
+625,H->Q,Q-> G-> H,220,19,True
+626,I->L,L-> J-> R-> I,330,0,False
+627,H->J,J-> R-> I-> G-> H,390,0,False
+628,C->F,F-> A-> C,190,0,False
+629,F->N,N-> E-> F,200,43,True
+630,E->C,C-> D-> N-> E,270,47,True
+631,I->G,G-> I,90,18,True
+632,F->G,G-> A-> F,190,0,False
+633,Q->D,D-> C-> A-> F-> Q,350,0,False
+634,C->R,R-> I-> A-> C,310,0,False
+635,Q->B,B-> F-> Q,180,34,True
+636,Q->C,C-> A-> F-> Q,290,0,False
+637,G->O,O-> P-> F-> A-> G,380,0,False
+638,P->C,C-> A-> F-> P,290,0,False
+639,A->E,E-> F-> A,190,0,False
+640,M->F,F-> P-> O-> M,290,0,False
+641,B->A,A-> F-> B,170,0,False
+642,C->I,I-> A-> C,220,0,False
+643,M->B,B-> F-> P-> O-> M,370,0,False
+644,Q->I,I-> G-> Q,190,22,True
+645,Q->L,L-> J-> R-> I-> G-> Q,520,0,False
+646,O->M,M-> O,100,2,True
+647,Q->P,P-> F-> Q,200,0,False
+648,J->E,E-> F-> A-> I-> R-> J,490,0,False
+649,E->A,A-> F-> E,190,0,False
+650,E->M,M-> N-> E,200,65,True
+651,H->G,G-> H,120,20,True
+652,M->E,E-> N-> M,200,67,True
+653,R->D,D-> C-> A-> I-> R,370,0,False
+654,F->H,H-> F,140,3,True
+655,C->J,J-> R-> I-> A-> C,400,0,False
+656,C->P,P-> F-> A-> C,290,0,False
+657,Q->M,M-> O-> P-> F-> Q,390,0,False
+658,D->I,I-> A-> C-> D,280,0,False
+659,F->M,M-> O-> P-> F,290,0,False
+660,I->M,M-> N-> A-> I,370,0,False
+661,P->M,M-> O-> P,190,42,True
+662,J->G,G-> I-> R-> J,270,0,False
+663,E->P,P-> F-> E,200,0,False
+664,F->J,J-> R-> I-> A-> F,390,0,False
+665,H->I,I-> G-> H,210,25,True
+666,J->A,A-> I-> R-> J,300,0,False
+667,D->G,G-> A-> C-> D,260,53,True
+668,E->Q,Q-> F-> E,200,38,True
+669,I->G,G-> I,90,19,True
+670,J->F,F-> A-> I-> R-> J,390,0,False
+671,F->L,L-> J-> R-> I-> A-> F,540,0,False
+672,P->M,M-> O-> P,190,49,True
+673,R->B,B-> F-> A-> I-> R,380,0,False
+674,E->Q,Q-> F-> E,200,40,True
+675,P->C,C-> A-> F-> P,290,0,False
+676,A->E,E-> F-> A,190,0,False
+677,E->L,L-> J-> R-> I-> A-> F-> E,640,0,False
+678,F->H,H-> F,140,4,True
+679,I->B,B-> F-> A-> I,290,0,False
+680,R->N,N-> A-> I-> R,360,0,False
+681,L->P,P-> F-> A-> I-> R-> J-> L,640,0,False
+682,F->G,G-> A-> F,190,0,False
+683,E->Q,Q-> F-> E,200,44,True
+684,Q->M,M-> O-> P-> F-> Q,390,0,False
+685,P->L,L-> J-> R-> I-> A-> F-> P,640,0,False
+686,F->N,N-> E-> F,200,45,True
+687,R->O,O-> P-> F-> A-> I-> R,490,0,False
+688,F->J,J-> R-> I-> A-> F,390,0,False
+689,R->P,P-> F-> A-> I-> R,400,0,False
+690,M->J,J-> R-> I-> A-> N-> M,550,0,False
+691,M->B,B-> F-> P-> O-> M,370,0,False
+692,P->A,A-> F-> P,190,0,False
+693,O->L,L-> J-> R-> I-> A-> F-> P-> O,730,0,False
+694,A->F,F-> A,90,0,False
+695,I->L,L-> J-> R-> I,330,0,False
+696,D->F,F-> A-> C-> D,250,0,False
+697,A->C,C-> A,100,52,True
+698,H->N,N-> E-> F-> H,340,46,True
+699,O->F,F-> P-> O,190,0,False
+700,F->Q,Q-> F,100,30,True
+701,I->O,O-> P-> F-> A-> I,400,0,False
+702,N->I,I-> A-> N,270,0,False
+703,B->L,L-> J-> R-> I-> A-> F-> B,620,0,False
+704,E->A,A-> F-> E,190,0,False
+705,F->I,I-> A-> F,210,0,False
+706,J->A,A-> I-> R-> J,300,0,False
+707,F->N,N-> E-> F,200,48,True
+708,B->O,O-> P-> F-> B,270,0,False
+709,H->P,P-> F-> H,240,0,False
+710,P->O,O-> P,90,28,True
+711,G->R,R-> I-> G,180,0,False
+712,J->L,L-> J,150,7,True
+713,L->P,P-> F-> A-> I-> R-> J-> L,640,0,False
+714,D->O,O-> M-> N-> D,310,68,True
+715,G->O,O-> P-> F-> A-> G,380,0,False
+716,Q->D,D-> C-> A-> F-> Q,350,0,False
+717,E->N,N-> E,100,30,True
+718,N->D,D-> N,110,15,True
+719,P->E,E-> F-> P,200,0,False
+720,O->H,H-> F-> P-> O,330,0,False
+721,P->C,C-> A-> F-> P,290,0,False
+722,H->J,J-> R-> I-> G-> H,390,0,False
+723,M->G,G-> A-> N-> M,350,69,True
+724,B->P,P-> F-> B,180,0,False
+725,E->N,N-> E,100,34,True
+726,M->P,P-> O-> M,190,51,True
+727,I->G,G-> I,90,23,True
+728,D->O,O-> M-> N-> D,310,71,True
+729,F->L,L-> J-> R-> I-> A-> F,540,0,False
+730,E->L,L-> J-> R-> I-> A-> F-> E,640,0,False
+731,E->Q,Q-> F-> E,200,49,True
+732,F->C,C-> A-> F,190,0,False
+733,A->L,L-> J-> R-> I-> A,450,0,False
+734,I->G,G-> I,90,27,True
+735,L->R,R-> J-> L,240,17,True
+736,P->A,A-> F-> P,190,0,False
+737,A->M,M-> N-> A,250,70,True
+738,O->P,P-> O,90,33,True
+739,C->Q,Q-> F-> A-> C,290,0,False
+740,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+741,I->O,O-> P-> F-> A-> I,400,0,False
+742,L->E,E-> F-> A-> I-> R-> J-> L,640,0,False
+743,O->C,C-> D-> N-> M-> O,370,73,True
+744,P->J,J-> R-> I-> A-> F-> P,490,0,False
+745,L->F,F-> A-> I-> R-> J-> L,540,0,False
+746,C->G,G-> A-> C,200,54,True
+747,L->B,B-> F-> A-> I-> R-> J-> L,620,0,False
+748,D->A,A-> C-> D,160,57,True
+749,F->E,E-> F,100,47,True
+750,I->L,L-> J-> R-> I,330,0,False
+751,C->D,D-> C,60,44,True
+752,M->A,A-> N-> M,250,74,True
+753,H->L,L-> J-> R-> I-> G-> H,540,0,False
+754,N->C,C-> D-> N,170,52,True
+755,R->A,A-> I-> R,210,0,False
+756,N->O,O-> M-> N,200,72,True
+757,E->I,I-> A-> F-> E,310,0,False
+758,A->P,P-> F-> A,190,0,False
+759,O->P,P-> O,90,48,True
+760,G->F,F-> A-> G,190,0,False
+761,D->C,C-> D,60,51,True
+762,F->P,P-> F,100,0,False
+763,B->I,I-> A-> F-> B,290,0,False
+764,R->N,N-> A-> I-> R,360,0,False
+765,M->C,C-> D-> N-> M,270,75,True
+766,L->P,P-> F-> A-> I-> R-> J-> L,640,0,False
+767,H->O,O-> P-> F-> H,330,0,False
+768,A->H,H-> G-> A,220,26,True
+769,Q->D,D-> C-> A-> F-> Q,350,0,False
+770,B->E,E-> F-> B,180,50,True
+771,P->H,H-> F-> P,240,0,False
+772,G->C,C-> A-> G,200,58,True
+773,P->I,I-> A-> F-> P,310,0,False
+774,F->P,P-> F,100,0,False
+775,D->H,H-> G-> A-> C-> D,380,62,True
+776,Q->N,N-> E-> F-> Q,300,51,True
+777,E->B,B-> F-> E,180,54,True
+778,P->B,B-> F-> P,180,0,False
+779,D->R,R-> I-> A-> C-> D,370,0,False
+780,F->B,B-> F,80,15,True
+781,A->B,B-> F-> A,170,0,False
+782,B->M,M-> O-> P-> F-> B,370,0,False
+783,I->C,C-> A-> I,220,0,False
+784,G->B,B-> F-> A-> G,270,0,False
+785,Q->J,J-> R-> I-> G-> Q,370,0,False
+786,P->F,F-> P,100,0,False
+787,E->J,J-> R-> I-> A-> F-> E,490,0,False
+788,M->B,B-> F-> P-> O-> M,370,0,False
+789,N->A,A-> N,150,12,True
+790,O->I,I-> A-> F-> P-> O,400,0,False
+791,H->A,A-> G-> H,220,29,True
+792,F->H,H-> F,140,12,True
+793,P->J,J-> R-> I-> A-> F-> P,490,0,False
+794,R->B,B-> F-> A-> I-> R,380,0,False
+795,I->O,O-> P-> F-> A-> I,400,0,False
+796,P->Q,Q-> F-> P,200,0,False
+797,M->L,L-> J-> R-> I-> A-> N-> M,700,0,False
+798,J->E,E-> F-> A-> I-> R-> J,490,0,False
+799,I->E,E-> F-> A-> I,310,0,False
+800,G->D,D-> C-> A-> G,260,67,True
+801,Q->N,N-> E-> F-> Q,300,52,True
+802,B->Q,Q-> F-> B,180,36,True
+803,B->D,D-> C-> A-> F-> B,330,0,False
+804,L->I,I-> R-> J-> L,330,0,False
+805,G->Q,Q-> G,100,3,True
+806,E->B,B-> F-> E,180,60,True
+807,L->Q,Q-> G-> I-> R-> J-> L,520,0,False
+808,M->H,H-> F-> P-> O-> M,430,0,False
+809,F->E,E-> F,100,56,True
+810,R->D,D-> C-> A-> I-> R,370,0,False
+811,I->G,G-> I,90,28,True
+812,J->Q,Q-> G-> I-> R-> J,370,0,False
+813,R->L,L-> J-> R,240,20,True
+814,L->I,I-> R-> J-> L,330,0,False
+815,A->J,J-> R-> I-> A,300,0,False
+816,H->J,J-> R-> I-> G-> H,390,0,False
+817,J->A,A-> I-> R-> J,300,0,False
+818,Q->D,D-> C-> A-> F-> Q,350,0,False
+819,P->G,G-> A-> F-> P,290,0,False
+820,M->E,E-> N-> M,200,76,True
+821,R->P,P-> F-> A-> I-> R,400,0,False
+822,R->C,C-> A-> I-> R,310,0,False
+823,I->D,D-> C-> A-> I,280,0,False
+824,G->D,D-> C-> A-> G,260,68,True
+825,L->F,F-> A-> I-> R-> J-> L,540,0,False
+826,R->P,P-> F-> A-> I-> R,400,0,False
+827,G->O,O-> P-> F-> A-> G,380,0,False
+828,M->O,O-> M,100,7,True
+829,I->A,A-> I,120,0,False
+830,B->M,M-> O-> P-> F-> B,370,0,False
+831,L->I,I-> R-> J-> L,330,0,False
+832,J->Q,Q-> G-> I-> R-> J,370,0,False
+833,D->G,G-> A-> C-> D,260,71,True
+834,D->E,E-> N-> D,210,39,True
+835,C->P,P-> F-> A-> C,290,0,False
+836,J->R,R-> J,90,22,True
+837,H->N,N-> E-> F-> H,340,58,True
+838,R->F,F-> A-> I-> R,300,0,False
+839,A->R,R-> I-> A,210,0,False
+840,Q->I,I-> G-> Q,190,29,True
+841,O->C,C-> D-> N-> M-> O,370,77,True
+842,I->C,C-> A-> I,220,0,False
+843,F->H,H-> F,140,15,True
+844,H->O,O-> P-> F-> H,330,0,False
+845,J->R,R-> J,90,24,True
+846,R->B,B-> F-> A-> I-> R,380,0,False
+847,P->D,D-> C-> A-> F-> P,350,0,False
+848,A->M,M-> N-> A,250,78,True
+849,C->I,I-> A-> C,220,0,False
+850,D->Q,Q-> F-> A-> C-> D,350,0,False
+851,C->P,P-> F-> A-> C,290,0,False
+852,M->N,N-> M,100,79,True
+853,L->I,I-> R-> J-> L,330,0,False
+854,F->L,L-> J-> R-> I-> A-> F,540,0,False
+855,H->B,B-> F-> H,220,19,True
+856,E->O,O-> P-> F-> E,290,0,False
+857,P->C,C-> A-> F-> P,290,0,False
+858,A->N,N-> A,150,14,True
+859,G->N,N-> A-> G,250,30,True
+860,L->G,G-> I-> R-> J-> L,420,0,False
+861,E->L,L-> J-> R-> I-> A-> F-> E,640,0,False
+862,C->H,H-> G-> A-> C,320,74,True
+863,N->E,E-> N,100,36,True
+864,G->O,O-> P-> F-> A-> G,380,0,False
+865,J->G,G-> I-> R-> J,270,0,False
+866,H->M,M-> O-> P-> F-> H,430,0,False
+867,B->G,G-> A-> F-> B,270,0,False
+868,A->E,E-> F-> A,190,0,False
+869,Q->B,B-> F-> Q,180,43,True
+870,O->D,D-> N-> M-> O,310,0,False
+871,A->E,E-> F-> A,190,0,False
+872,L->I,I-> R-> J-> L,330,0,False
+873,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+874,F->G,G-> A-> F,190,0,False
+875,E->P,P-> F-> E,200,0,False
+876,R->O,O-> P-> F-> A-> I-> R,490,0,False
+877,L->N,N-> A-> I-> R-> J-> L,600,0,False
+878,F->O,O-> P-> F,190,0,False
+879,A->O,O-> P-> F-> A,280,0,False
+880,R->C,C-> A-> I-> R,310,0,False
+881,B->F,F-> B,80,16,True
+882,F->Q,Q-> F,100,31,True
+883,J->L,L-> J,150,10,True
+884,F->B,B-> F,80,20,True
+885,P->L,L-> J-> R-> I-> A-> F-> P,640,0,False
+886,C->A,A-> C,100,60,True
+887,G->M,M-> N-> A-> G,350,0,False
+888,B->P,P-> F-> B,180,0,False
+889,D->C,C-> D,60,54,True
+890,M->B,B-> F-> P-> O-> M,370,0,False
+891,F->O,O-> P-> F,190,0,False
+892,A->H,H-> G-> A,220,31,True
+893,D->J,J-> R-> I-> A-> C-> D,460,0,False
+894,R->G,G-> I-> R,180,0,False
+895,D->G,G-> A-> C-> D,260,78,True
+896,D->B,B-> F-> A-> C-> D,330,0,False
+897,O->E,E-> F-> P-> O,290,0,False
+898,B->J,J-> R-> I-> A-> F-> B,470,0,False
+899,P->B,B-> F-> P,180,0,False
+900,D->M,M-> N-> D,210,0,False
+901,J->G,G-> I-> R-> J,270,0,False
+902,N->M,M-> N,100,0,False
+903,Q->O,O-> P-> F-> Q,290,0,False
+904,Q->B,B-> F-> Q,180,46,True
+905,R->L,L-> J-> R,240,26,True
+906,Q->J,J-> R-> I-> G-> Q,370,0,False
+907,E->R,R-> I-> A-> F-> E,400,0,False
+908,O->J,J-> R-> I-> A-> F-> P-> O,580,0,False
+909,M->R,R-> I-> A-> N-> M,460,0,False
+910,B->H,H-> F-> B,220,22,True
+911,D->J,J-> R-> I-> A-> C-> D,460,0,False
+912,R->E,E-> F-> A-> I-> R,400,0,False
+913,B->F,F-> B,80,25,True
+914,I->L,L-> J-> R-> I,330,0,False
+915,N->M,M-> N,100,0,False
+916,I->N,N-> A-> I,270,0,False
+917,P->N,N-> M-> O-> P,290,0,False
+918,F->J,J-> R-> I-> A-> F,390,0,False
+919,E->G,G-> A-> F-> E,290,0,False
+920,F->B,B-> F,80,26,True
+921,R->A,A-> I-> R,210,0,False
+922,H->A,A-> G-> H,220,33,True
+923,C->R,R-> I-> A-> C,310,0,False
+924,P->A,A-> F-> P,190,0,False
+925,G->F,F-> A-> G,190,0,False
+926,C->R,R-> I-> A-> C,310,0,False
+927,N->I,I-> A-> N,270,0,False
+928,F->R,R-> I-> A-> F,300,0,False
+929,B->G,G-> A-> F-> B,270,0,False
+930,I->P,P-> F-> A-> I,310,0,False
+931,E->O,O-> P-> F-> E,290,0,False
+932,C->M,M-> N-> D-> C,270,0,False
+933,G->M,M-> N-> A-> G,350,0,False
+934,M->H,H-> F-> P-> O-> M,430,0,False
+935,D->H,H-> G-> A-> C-> D,380,79,True
+936,H->F,F-> H,140,20,True
+937,C->O,O-> M-> N-> D-> C,370,0,False
+938,H->N,N-> E-> F-> H,340,61,True
+939,B->O,O-> P-> F-> B,270,0,False
+940,J->P,P-> F-> A-> I-> R-> J,490,0,False
+941,G->H,H-> G,120,22,True
+942,A->I,I-> A,120,0,False
+943,A->G,G-> A,100,8,True
+944,E->D,D-> N-> E,210,42,True
+945,R->M,M-> N-> A-> I-> R,460,0,False
+946,P->G,G-> A-> F-> P,290,0,False
+947,R->A,A-> I-> R,210,0,False
+948,F->Q,Q-> F,100,32,True
+949,A->H,H-> G-> A,220,35,True
+950,A->N,N-> A,150,19,True
+951,J->D,D-> C-> A-> I-> R-> J,460,0,False
+952,G->J,J-> R-> I-> G,270,0,False
+953,L->J,J-> L,150,11,True
+954,N->Q,Q-> F-> E-> N,300,57,True
+955,J->H,H-> G-> I-> R-> J,390,0,False
+956,O->J,J-> R-> I-> A-> F-> P-> O,580,0,False
+957,A->C,C-> A,100,61,True
+958,Q->I,I-> G-> Q,190,31,True
+959,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+960,F->A,A-> F,90,0,False
+961,C->I,I-> A-> C,220,0,False
+962,F->R,R-> I-> A-> F,300,0,False
+963,P->R,R-> I-> A-> F-> P,400,0,False
+964,A->H,H-> G-> A,220,43,True
+965,G->A,A-> G,100,17,True
+966,C->G,G-> A-> C,200,77,True
+967,G->J,J-> R-> I-> G,270,0,False
+968,D->L,L-> J-> R-> I-> A-> C-> D,610,0,False
+969,D->I,I-> A-> C-> D,280,0,False
+970,M->B,B-> F-> P-> O-> M,370,0,False
+971,J->M,M-> N-> A-> I-> R-> J,550,0,False
+972,M->R,R-> I-> A-> N-> M,460,0,False
+973,G->N,N-> A-> G,250,36,True
+974,O->Q,Q-> F-> P-> O,290,0,False
+975,D->A,A-> C-> D,160,64,True
+976,R->I,I-> R,90,0,False
+977,B->F,F-> B,80,29,True
+978,N->E,E-> N,100,44,True
+979,J->Q,Q-> G-> I-> R-> J,370,0,False
+980,H->L,L-> J-> R-> I-> G-> H,540,0,False
+981,I->R,R-> I,90,0,False
+982,P->I,I-> A-> F-> P,310,0,False
+983,P->R,R-> I-> A-> F-> P,400,0,False
+984,A->F,F-> A,90,0,False
+985,R->E,E-> F-> A-> I-> R,400,0,False
+986,A->O,O-> P-> F-> A,280,0,False
+987,G->L,L-> J-> R-> I-> G,420,0,False
+988,C->J,J-> R-> I-> A-> C,400,0,False
+989,G->E,E-> F-> A-> G,290,0,False
+990,G->E,E-> F-> A-> G,290,0,False
+991,F->I,I-> A-> F,210,0,False
+992,M->P,P-> O-> M,190,61,True
+993,B->L,L-> J-> R-> I-> A-> F-> B,620,0,False
+994,P->O,O-> P,90,56,True
+995,L->O,O-> P-> F-> A-> I-> R-> J-> L,730,0,False
+996,C->H,H-> G-> A-> C,320,0,False
+997,P->F,F-> P,100,0,False
+998,J->M,M-> N-> A-> I-> R-> J,550,0,False
+999,P->H,H-> F-> P,240,0,False
+,,,,PB: ,4530.0
