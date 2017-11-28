@@ -163,7 +163,7 @@ class No(object):
 		self.win.destroy()
 
 	def move(self, event):
-		if self.move_flag and self.qtdMoves==0:
+		if self.move_flag and self.qtdMoves == 0:
 			new_xpos, new_ypos = event.x, event.y
 
 			self.canvas.move(self.image_obj, new_xpos - self.mouse_xpos, new_ypos - self.mouse_ypos)
@@ -382,6 +382,9 @@ class Rede(tk.Frame):
 			for j in range(len(caminhos[i])-1):
 				custo = custo + grafo[caminhos[i][j]][caminhos[i][j+1]]
 			pesoCaminho.append((caminhos[i] , custo))
+		
+		pesoCaminho.sort(key=lambda x: x[1])
+		#print("Peso ordenado: ", pesoCaminho, "\n")
 		return pesoCaminho
 	
 	def dijkstra(self, grafo, origem, dest, caminhosDijkstra, visited=[], distances={}, predecessors={}):
@@ -593,7 +596,7 @@ class Rede(tk.Frame):
 		for i in range(len(indexToDelete)):
 				self.listadeArestas.remove(self.listadeArestas[indexToDelete[i]])
 	def salvar_Topologia(self):
-		garbage_collector()
+		self.garbage_collector()
 
 		self.win = tk.Toplevel()
 		self.win.wm_title("Salvar Topologia")
@@ -752,7 +755,7 @@ def main():
 	app_win.title(APP_TITLE)
 	app_win.geometry("+{}+{}".format(APP_XPOS, APP_YPOS))
 	app_win.geometry("{}x{}".format(APP_WIDTH, APP_HEIGHT))
-	app_win.resizable(width=False, height=False)
+	#app_win.resizable(width=False, height=False)
 	app_win.iconbitmap(r'images\favicon.ico')
 	app = Rede(app_win)
 	app_win.mainloop()
