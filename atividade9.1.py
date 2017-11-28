@@ -410,7 +410,6 @@ class Rede(tk.Frame):
 
 	def firstFit(self,no1,no2):
 		chamadaConcluida = False
-		
 		caminhoDijkstra = []
 		pLambda = 0
 		self.dijkstra(self.dic_adj, no1, no2, caminhoDijkstra, visited=[], distances={}, predecessors={})
@@ -422,16 +421,13 @@ class Rede(tk.Frame):
 			for j in range(len(caminhoDijkstra)-1):
 				a = caminhoDijkstra[j]
 				b = caminhoDijkstra[j+1]
-				#print(a,b)
 				for k in range(len(self.listadeArestas)):
 					if (((self.listadeArestas[k].No1 == a) and (self.listadeArestas[k].No2 == b)) or ((self.listadeArestas[k].No1 == b) and (self.listadeArestas[k].No2 == a))):	
 						posicaoAresta.append(k)
 				if (self.listadeArestas[posicaoAresta[len(posicaoAresta)-1]].canaisLambda[self.posicaoLambda] == 0):
 					posicaoLivre.append(self.posicaoLambda)
-					#print("Posicao Livre:", posicaoLivre)
 
 			if(len(posicaoLivre) == len(caminhoDijkstra)-1):
-				#print(caminhoDijkstra,self.posicaoLambda)
 				for k in range(len(posicaoAresta)):
 					self.listadeArestas[posicaoAresta[k]].canaisLambda[posicaoLivre[0]] = 1
 					pLambda = posicaoLivre[0]
@@ -440,10 +436,6 @@ class Rede(tk.Frame):
 			else:
 				self.posicaoLambda += 1
 				posicaoLivre = []
-		# for v in range(len(self.listadeArestas)):
-		# 	print("Aresta: ",self.listadeArestas[v].No1," to ",self.listadeArestas[v].No2,":",self.listadeArestas[v].canaisLambda)
-
-		#print("Chamadas: ",self.chamadasConcluida)
 		return caminhoDijkstra,pLambda,chamadaConcluida
 
 	def simulacao(self):
@@ -473,13 +465,6 @@ class Rede(tk.Frame):
 		origemDestFisrt = []
 		caminhoD = []
 		pesoD = []
-
-		# simulacoes = pd.DataFrame()
-		# simulacoes['#'] = 0
-		# simulacoes['Valor Lambda'] = 0
-		# simulacoes['Chamadas Requisitadas'] = 0
-		# simulacoes['Chamadas Perdidas'] = 0
-		# simulacoes['Probabilidade de Bloqueio'] = 0
 
 		nChamadas = int(self.numeroChamadas.get())
 		for i in range(nChamadas):
