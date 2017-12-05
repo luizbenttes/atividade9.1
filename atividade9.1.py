@@ -21,11 +21,20 @@ class Aresta(object):
 		self.No1 = No1
 		self.No2 = No2
 		self.valorLambda = valorLambda
+
 		self.canaisLambda = [0 for i in range(self.valorLambda)]
+		self.parLambda =[[] for _ in range (self.valorLambda)]
+		self.caminhoLambda =[[] for _ in range (self.valorLambda)]
+
+		self.canaisLambdaNCaminhos = [0 for i in range(self.valorLambda)]
+		self.parLambdaNCaminhos =[[] for _ in range (self.valorLambda)]
+		self.caminhoLambdaNCaminhos =[[] for _ in range (self.valorLambda)]
+
 		self.canvas = canvas
 		self.lista = lista
 		self.message = tk.StringVar()
 		self.message.set(self.comprimento)
+		self.retirado =  False
 		self.on = True
 
 		self.posicaoAresta = self.lista[self.No1].posicaoAtual + self.lista[self.No2].posicaoAtual
@@ -34,7 +43,7 @@ class Aresta(object):
 		self.widget = tk.Button(self.canvas, text=self.message.get(), 
 			fg='white', bg='black',command =self.configura_Aresta)
 		self.widget.pack()
-		#canvas.tag_bind(self.aresta, '<Double-Button-1>', self.configura_Aresta)
+
 		x = (self.lista[No1].posicaoAtual[0] + self.lista[No2].posicaoAtual[0]) / 2
 		y = (self.lista[No1].posicaoAtual[1] + self.lista[No2].posicaoAtual[1]) / 2
 		canvas.create_window(x, y, window=self.widget)
@@ -52,6 +61,7 @@ class Aresta(object):
 
 	def configura_Aresta(self):
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Aresta: "+str(self.lista[self.No1].nome_No+"->"+self.lista[self.No2].nome_No))
 		self.win.iconbitmap(r'images\favicon.ico')
 		self.win.geometry("%dx%d%+d%+d" % (280, 150, 100, 200))
@@ -118,6 +128,7 @@ class No(object):
 	def set_No(self,event):
 
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Configurações: "+self.nome_No)
 		self.win.iconbitmap(r'images\favicon.ico')
 		self.win.geometry("%dx%d%+d%+d" % (290,85, self.xpos, self.ypos))
@@ -182,7 +193,7 @@ class No(object):
 		self.qtdMoves += 1
 		self.canvas.delete(self.canvas_id)
 		self.move_flag = False
-		print(self.nome_No,": ",self.canvas.coords(self.image_obj))
+		#print(self.nome_No,": ",self.canvas.coords(self.image_obj))
 		self.posicaoAtual = self.canvas.coords(self.image_obj)
 		new_xpos, new_ypos = self.canvas.coords(self.image_obj)[0],self.canvas.coords(self.image_obj)[1]
 
@@ -210,8 +221,8 @@ class Rede(tk.Frame):
 		fileMenu = Menu(menubar)
 		fileMenu.add_command(label="Criar Rede",command= self.criar_Rede)
 		fileMenu.add_command(label="Carregar Topologia",command =self.carregar_Topologia)
-		fileMenu.add_command(label="Exit",command=self.close)
-		menubar.add_cascade(label="File", menu=fileMenu)
+		fileMenu.add_command(label="Sair",command=self.close)
+		menubar.add_cascade(label="Opções", menu=fileMenu)
 
 	def deleta(self):
 		self.listadeNos 		= []
@@ -291,7 +302,7 @@ class Rede(tk.Frame):
 			adj = []
 			for j in range(len(self.grafo)):
 				if (self.grafo[i][j]!=0 and i<=j):
-					novaAresta = Aresta(self.canvas,self.grafo[i][j], self.listadeNos, i, j, 10) #falta por o lambda
+					novaAresta = Aresta(self.canvas,self.grafo[i][j], self.listadeNos, i, j, 40) #falta por o lambda
 
 					self.listadeArestas.append(novaAresta)
 					self.listadeNos[i].arestasAdj.append(novaAresta)
@@ -323,6 +334,7 @@ class Rede(tk.Frame):
 
 	def tela_set_Topologia(self):
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Configuração da Rede")
 		self.win.iconbitmap(r'images\favicon.ico')
 		self.win.geometry("%dx%d%+d%+d" % (300, 140, 100, 200))
@@ -345,10 +357,18 @@ class Rede(tk.Frame):
 			if(self.listadeArestas[i].on):
 				self.listadeArestas[i].valorLambda = novoLambda
 				self.listadeArestas[i].canaisLambda = [0 for i in range(novoLambda)]
+				self.listadeArestas[i].parLambda = [[] for i in range(novoLambda)]
+				self.listadeArestas[i].caminhoLambda =[[] for i in range (novoLambda)]
+
+				self.listadeArestas[i].canaisLambdaNCaminhos = [0 for i in range(novoLambda)]
+				self.listadeArestas[i].parLambdaNCaminhos =[[] for i in range (novoLambda)]
+				self.listadeArestas[i].caminhoLambdaNCaminhos =[[] for i in range (novoLambda)]
 		self.win.destroy()
 
 	def tela_simulacao(self):
+
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Simulação")
 		self.win.iconbitmap(r'images\favicon.ico')
 		self.win.geometry("%dx%d%+d%+d" % (300, 200, 100, 200))
@@ -387,6 +407,123 @@ class Rede(tk.Frame):
 		#print("Peso ordenado: ", pesoCaminho, "\n")
 		return pesoCaminho
 	
+	def novoDic(self, no1, no2):
+
+		grafoAux = [[] for _ in range(len(self.grafo))]
+		for i in range(len(self.grafo)):
+			grafoAux[i] = list(self.grafo[i])
+
+		grafoAux[no1][no2] = 0
+		grafoAux[no2][no1] = 0
+		#print(grafoAux)
+
+		dic_adjAux = {}
+		for i in range(len(grafoAux)):
+			adjacents = {}
+			adj = []
+			for j in range(len(grafoAux)):
+				if (grafoAux[i][j] != 0):
+					adjacents[j] = (grafoAux[i][j])
+			dic_adjAux[i] = adjacents
+		#print(dic_adjAux)
+		return dic_adjAux
+
+	def sobrevivenciaDijkstra(self):
+		sobrevivencia = pd.DataFrame()
+		sobrevivencia['Origem->Destino'] = 0
+		sobrevivencia['Rota Principal'] = 0
+		sobrevivencia['Lambda Principal'] = 0
+		sobrevivencia['Enlace Falhou'] = 0
+		sobrevivencia['Rota Restauração'] = 0
+		sobrevivencia['Lambda Alternativo'] = 0
+		sobrevivencia['Recuperou (0/1)'] = 0
+
+		oriDest = []
+		rotaprin = []
+		lambdausado = []
+		enlace = []
+		rotalter = []
+		lambdalter = []
+		recuperou = []
+
+		for i in range(len(self.listadeArestas)):
+			if self.listadeArestas[i].on == True:
+				#print(str(self.listadeNos[self.listadeArestas[i].No1].nome_No)+"->"+str(self.listadeNos[self.listadeArestas[i].No2].nome_No))
+				for j in range(len(self.listadeArestas[i].canaisLambda)):
+					dic_adjAux = {}
+					if self.listadeArestas[i].canaisLambda[j] == 1:
+						enlace.append(str(self.listadeNos[self.listadeArestas[i].No1].nome_No)+"->"+str(self.listadeNos[self.listadeArestas[i].No2].nome_No))
+						lambdausado.append(j)
+						caminhoSalvar = self.listadeArestas[i].parLambda[j]
+
+						#print("Caminho a recuperar: ",caminhoSalvar)
+						aux = list(caminhoSalvar)
+						for u in range(len(caminhoSalvar)):
+							aux[u] = self.listadeNos[int(aux[u])].nome_No
+						aux = str(aux)
+						aux = aux.replace(',','->')
+						aux = aux.replace("[","")
+						aux = aux.replace("]","")
+						aux = aux.replace("'","")
+
+						oriDest.append(aux)
+
+						aux = list(self.listadeArestas[i].caminhoLambda[j])
+
+						# for u in range(len(aux)):
+						# 	aux[u] = self.listadeNos[int(aux[u])].nome_No
+						aux = str(aux)
+						aux = aux.replace(',','->')
+						aux = aux.replace("[","")
+						aux = aux.replace("]","")
+						aux = aux.replace("'","")
+
+						rotaprin.append(aux)
+						#arrumar o dicionário pra fazer o dijkstra sem a aresta que eu quero retirar
+						dic_adjAux = self.novoDic(self.listadeArestas[i].No1,self.listadeArestas[i].No2)
+						origem = caminhoSalvar[0]
+						destino = caminhoSalvar[1]
+						novoCaminho,caminhoLambda,chamadaRecuperada = self.firstFitSemAlteracao(dic_adjAux, origem, destino)
+						#print("Novo Caminho: ",novoCaminho)
+
+						if chamadaRecuperada == True:
+							c = novoCaminho
+							for k in range(len(c)):
+								c[k] = self.listadeNos[int(c[k])].nome_No
+							c = str(c)
+							c = c.replace(",","->")
+							c = c.replace("[","")
+							c = c.replace("]","")
+							c = c.replace("'","")
+							rotalter.append(c)
+							lambdalter.append(caminhoLambda)
+							recuperou.append(1)
+						else:
+							rotalter.append("-")
+							lambdalter.append("-")
+							recuperou.append(0)  
+
+		oriDest.append("")
+		rotaprin.append("")
+		rotalter.append("")
+		lambdausado.append("")
+		enlace.append("")
+		lambdalter.append("Taxa de Sucesso: ")
+		a = 0 
+		for i in range(len(recuperou)):
+			a += recuperou[i]
+		teste  = (a/len(recuperou)*100)
+		recuperou.append(teste)
+
+		sobrevivencia['Origem->Destino'] = oriDest
+		sobrevivencia['Rota Principal'] = rotaprin
+		sobrevivencia['Lambda Principal'] = lambdausado 
+		sobrevivencia['Enlace Falhou'] = enlace
+		sobrevivencia['Rota Restauração'] = rotalter
+		sobrevivencia['Lambda Alternativo'] = lambdalter
+		sobrevivencia['Recuperou (0/1)'] = recuperou
+		sobrevivencia.to_csv('simulation/simulacaoSobrevivencia.csv',index=False)
+
 	def dijkstra(self, grafo, origem, dest, caminhosDijkstra, visited=[], distances={}, predecessors={}):
 		if origem == dest:
 			path=[]
@@ -409,14 +546,87 @@ class Rede(tk.Frame):
 				if k not in visited:
 					unvisited[k] = distances.get(k,float('inf'))
 			x = min(unvisited, key=unvisited.get)
-			self.dijkstra(grafo, x, dest, caminhosDijkstra, visited, distances, predecessors,)
+			self.dijkstra(grafo, x, dest, caminhosDijkstra, visited, distances, predecessors)
 
-	def firstFit(self,no1,no2):
+	def firstFitSemAlteracao(self,dic_adj, no1, no2):
 		chamadaConcluida = False
 		caminhoDijkstra = []
 		pLambda = 0
-		self.dijkstra(self.dic_adj, no1, no2, caminhoDijkstra, visited=[], distances={}, predecessors={})
+		#print(dic_adj)
+		self.dijkstra(dic_adj, no1, no2, caminhoDijkstra, visited=[], distances={}, predecessors={})
+		#print(caminhoDijkstra)
+		posicaoLivre = []
+		self.posicaoLambda = 0
+		while (self.posicaoLambda != self.listadeArestas[0].valorLambda):
+			posicaoAresta = []
+			for j in range(len(caminhoDijkstra)-1):
+				a = caminhoDijkstra[j]
+				b = caminhoDijkstra[j+1]
+				for k in range(len(self.listadeArestas)):
+					if (((self.listadeArestas[k].No1 == a) and (self.listadeArestas[k].No2 == b)) or ((self.listadeArestas[k].No1 == b) and (self.listadeArestas[k].No2 == a))):	
+						posicaoAresta.append(k)
+				if (self.listadeArestas[posicaoAresta[len(posicaoAresta)-1]].canaisLambda[self.posicaoLambda] == 0):
+					posicaoLivre.append(self.posicaoLambda)
+
+			if(len(posicaoLivre) == len(caminhoDijkstra)-1):
+				for k in range(len(posicaoAresta)):
+					self.listadeArestas[posicaoAresta[k]].canaisLambda[posicaoLivre[0]] = 2
+					pLambda = posicaoLivre[0]
+					self.posicaoLambda = self.listadeArestas[0].valorLambda
+				chamadaConcluida = True
+			else:
+				self.posicaoLambda += 1
+				posicaoLivre = []
+				
+		return caminhoDijkstra,pLambda,chamadaConcluida
+
+	def firstFitNCaminhos(self, todosCaminhos):
+		# chamadaConcluida = False
+		# pLambda = 0
+		# posicaoLivre = []
+		# self.posicaoLambda = 0
+		for x in range(len(todosCaminhos)):
+			caminho = todosCaminhos[x][0]
+			self.posicaoLambda = 0
+			pLambda = 0
+			posicaoLivre = []
+			chamadaConcluida = False
+			while (self.posicaoLambda != self.listadeArestas[0].valorLambda):
+				posicaoAresta = []
+				for j in range(len(caminho)-1):
+					a = caminho[j]
+					b = caminho[j+1]
+					for k in range(len(self.listadeArestas)):
+						if (((self.listadeArestas[k].No1 == a) and (self.listadeArestas[k].No2 == b)) or ((self.listadeArestas[k].No1 == b) and (self.listadeArestas[k].No2 == a))):	
+							posicaoAresta.append(k)
+					if (self.listadeArestas[posicaoAresta[len(posicaoAresta)-1]].canaisLambdaNCaminhos[self.posicaoLambda] == 0):
+						posicaoLivre.append(self.posicaoLambda)
+
+				if(len(posicaoLivre) == len(caminho)-1):
+					for k in range(len(posicaoAresta)):
+						self.listadeArestas[posicaoAresta[k]].canaisLambdaNCaminhos[posicaoLivre[0]] = 1
+						#self.listadeArestas[posicaoAresta[k]].parLambdaNCaminhos[posicaoLivre[0]] = [no1,no2]
+						self.listadeArestas[posicaoAresta[k]].caminhoLambdaNCaminhos[posicaoLivre[0]] = caminho
+						pLambda = posicaoLivre[0]
+					self.posicaoLambda = self.listadeArestas[0].valorLambda
+					chamadaConcluida = True
+					return caminho,todosCaminhos[x][1],pLambda,chamadaConcluida	
+				else:
+					self.posicaoLambda += 1
+					posicaoLivre = []
+		caminho = "-"
+		pLambda = "-"
+		peso = '-'
+		return caminho,peso,pLambda,chamadaConcluida			
 		
+
+	def firstFit(self,dic_adj, no1, no2):
+		chamadaConcluida = False
+		caminhoDijkstra = []
+		pLambda = 0
+		#print(dic_adj)
+		self.dijkstra(dic_adj, no1, no2, caminhoDijkstra, visited=[], distances={}, predecessors={})
+		#print(caminhoDijkstra)
 		posicaoLivre = []
 		self.posicaoLambda = 0
 		while (self.posicaoLambda != self.listadeArestas[0].valorLambda):
@@ -433,12 +643,15 @@ class Rede(tk.Frame):
 			if(len(posicaoLivre) == len(caminhoDijkstra)-1):
 				for k in range(len(posicaoAresta)):
 					self.listadeArestas[posicaoAresta[k]].canaisLambda[posicaoLivre[0]] = 1
+					self.listadeArestas[posicaoAresta[k]].parLambda[posicaoLivre[0]] = [no1,no2]
+					self.listadeArestas[posicaoAresta[k]].caminhoLambda[posicaoLivre[0]] = caminhoDijkstra
 					pLambda = posicaoLivre[0]
 					self.posicaoLambda = self.listadeArestas[0].valorLambda
 				chamadaConcluida = True
 			else:
 				self.posicaoLambda += 1
 				posicaoLivre = []
+				
 		return caminhoDijkstra,pLambda,chamadaConcluida
 
 	def simulacao(self):
@@ -457,7 +670,7 @@ class Rede(tk.Frame):
 		firstFit = pd.DataFrame()
 		firstFit["# Chamada"] = 0
 		firstFit["Origem->Destino"] = 0
-		firstFit["Caminho Dijstra"] = 0
+		firstFit["Caminho Dijkstra"] = 0
 		firstFit['Peso'] = 0
 		firstFit['Lambda Usado'] = 0
 		firstFit['Chamada Aceita?'] = 0
@@ -469,15 +682,31 @@ class Rede(tk.Frame):
 		caminhoD = []
 		pesoD = []
 
+
+		firstFitNCaminhos = pd.DataFrame()
+		firstFitNCaminhos["# Chamada"] = 0
+		firstFitNCaminhos["Origem->Destino"] = 0
+		firstFitNCaminhos["Caminho Recuperado"] = 0
+		firstFitNCaminhos['Peso'] = 0
+		firstFitNCaminhos['Lambda Usado'] = 0
+		firstFitNCaminhos['Chamada Aceita?'] = 0
+
+		#numChamadaFirst = []
+		lambdaUsadoNCaminho = []
+		chamadaAceitaNCaminho = []
+		#origemDestFisrt = []
+		caminhoNCaminho = []
+		pesoNCaminho = []
+
 		nChamadas = int(self.numeroChamadas.get())
-		for i in range(nChamadas):
+		for i in range(int(nChamadas/2)):
 			import random as rd 
 			no1 = rd.randint(0,len(self.listadeNos)-1)
 			no2 = rd.randint(0,len(self.listadeNos)-1)
 			while no1 == no2:
 				no2 = rd.randint(0,len(self.listadeNos)-1)
 
-			caminhoDijkstra, pLambda, chamadaConcluida = self.firstFit(no1,no2)
+			caminhoDijkstra, pLambda, chamadaConcluida = self.firstFit(self.dic_adj,no1,no2)
 
 			#alimentacao csv fisrt fit:
 			numChamadaFirst.append(i)
@@ -489,11 +718,29 @@ class Rede(tk.Frame):
 			aux = []
 			aux.append(caminhoDijkstra)
 			td = self.pesos(self.grafo, caminhos)
+
+			caminhoNcaminho,pesoN, lambdaNcaminho, chamadarec = self.firstFitNCaminhos(td)
+
+			pesoNCaminho.append(pesoN)
+			nCaminho = list(caminhoNcaminho)
+			if len(nCaminho) != 1:
+				for k in range(len(nCaminho)):
+					nCaminho[k] = self.listadeNos[int(nCaminho[k])].nome_No
+				nCaminho = str(nCaminho)
+				nCaminho = nCaminho.replace(",","->")
+				nCaminho = nCaminho.replace("[","")
+				nCaminho = nCaminho.replace("]","")
+				nCaminho = nCaminho.replace("'","")
+			caminhoNCaminho.append(nCaminho)
+
+			lambdaUsadoNCaminho.append(lambdaNcaminho)
+			chamadaAceitaNCaminho.append(chamadarec)
+
 			dj = self.pesos(self.grafo, aux)
 			aux = []
 			c,p = dj[0][0],dj[0][1]
 			for k in range(len(c)):
-					c[k] = self.listadeNos[int(c[k])].nome_No
+				c[k] = self.listadeNos[int(c[k])].nome_No
 			c = str(c)
 			c = c.replace(",","->")
 			c = c.replace("[","")
@@ -531,32 +778,57 @@ class Rede(tk.Frame):
 		origemDestFisrt.append("")
 		caminhoD.append("")
 		pesoD.append("")
-		# lambdaUsado.append("")
-		# chamadaAceita.append("")
 
 		lambdaUsado.append("PB: ")
 		rec = 0
 		for i in range(len(chamadaAceita)):
 			if chamadaAceita[i]==False:
 				rec += 1
-		pblock = (nChamadas*rec)/100
+		pblock = rec/(nChamadas/2)
 		chamadaAceita.append(pblock)
 		firstFit['# Chamada'] = numChamadaFirst
 		firstFit["Origem->Destino"] = origemDestFisrt
-		firstFit["Caminho Dijstra"] = caminhoD
+		firstFit["Caminho Dijkstra"] = caminhoD
 		firstFit['Peso'] = pesoD
 		firstFit['Lambda Usado'] = lambdaUsado
 		firstFit['Chamada Aceita?'] = chamadaAceita
 
+		print(len(numChamadaFirst))
+		print(len(caminhoNCaminho))
+		firstFitNCaminhos["# Chamada"] = numChamadaFirst
+		firstFitNCaminhos["Origem->Destino"] = origemDestFisrt
+		pesoNCaminho.append("")
+		firstFitNCaminhos["Peso"] = pesoNCaminho
+		caminhoNCaminho.append("")
+		firstFitNCaminhos["Caminho Recuperado"] = caminhoNCaminho
+		lambdaUsadoNCaminho.append("PB: ")
+		firstFitNCaminhos['Lambda Usado'] = lambdaUsadoNCaminho
+		rec = 0
+		for i in range(len(chamadaAceitaNCaminho)):
+			if chamadaAceitaNCaminho[i]==False:
+				rec += 1
+		pblock = rec/(nChamadas/2)
+		chamadaAceitaNCaminho.append(pblock)
+		firstFitNCaminhos['Chamada Aceita?'] = chamadaAceitaNCaminho
 
+		firstFitNCaminhos.to_csv('simulation/simulacaoFirstFitNCaminhos.csv',index=False)
 		firstFit.to_csv('simulation/simulacaoFirstFit.csv',index=False)
 		arquivo.to_csv('simulation/simulacao.csv',index=False)
 
 		self.csv_simulacao = arquivo
+
+		# for i in range(len(self.listadeArestas)):
+		# 	print(str(self.listadeNos[self.listadeArestas[i].No1].nome_No)+"->"+str(self.listadeNos[self.listadeArestas[i].No2].nome_No))
+		# 	print(self.listadeArestas[i].valorLambda)
+		# 	print(self.listadeArestas[i].canaisLambda)
+
+		self.sobrevivenciaDijkstra()
 		self.win.destroy()
 
+		
 	def aviso(self,text):
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Atenção")
 		self.win.geometry("%dx%d%+d%+d" % (230, 70, 100, 200))
 
@@ -599,6 +871,7 @@ class Rede(tk.Frame):
 		self.garbage_collector()
 
 		self.win = tk.Toplevel()
+		self.win.grab_set()
 		self.win.wm_title("Salvar Topologia")
 		self.win.iconbitmap(r'images\favicon.ico')
 		self.win.geometry("%dx%d%+d%+d" % (300, 80, 100, 200))
@@ -728,15 +1001,17 @@ class Rede(tk.Frame):
 				item1 = i
 			if (self.listadeNos[i].nome_No == self.lista2.get()):
 				item2 = i
+		if item1 != item2:
+			novaAresta = Aresta(self.canvas, self.valorComprimento.get(), self.listadeNos, item1, item2, int(self.valorLambda.get()))
+			self.listadeNos[item1].arestasAdj.append(novaAresta)
+			self.listadeNos[item2].arestasAdj.append(novaAresta)
 
-		novaAresta = Aresta(self.canvas, self.valorComprimento.get(), self.listadeNos, item1, item2, int(self.valorLambda.get()))
-		self.listadeNos[item1].arestasAdj.append(novaAresta)
-		self.listadeNos[item2].arestasAdj.append(novaAresta)
+			self.listadeNos[item1].nosAdj.append(self.listadeNos[item2])
+			self.listadeNos[item2].nosAdj.append(self.listadeNos[item1])
 
-		self.listadeNos[item1].nosAdj.append(self.listadeNos[item2])
-		self.listadeNos[item2].nosAdj.append(self.listadeNos[item1])
-
-		self.win.destroy()
+			self.win.destroy()
+		else:
+			self.aviso("Aresta não criada!\n Não é permitido a criação de laço")
 
 	def close(self):
 		print("Rede-Shutdown")
